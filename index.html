@@ -1,0 +1,1495 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<title>SOE — Springs Of Expertise | متجر البرمجيات</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{font-size:15px;overflow-x:hidden}
+body{font-family:system-ui,-apple-system,sans-serif;background:#F0F4F8;color:#1E293B;overflow-x:hidden;width:100%;padding-bottom:80px}
+:root{
+--c:#1ABCEE;--c2:#0EA3D4;--cbg:#E8F8FD;
+--g:#64748B;--g2:#94A3B8;
+--dk:#0F172A;--dk2:#1E293B;
+--bg:#F0F4F8;--bg2:#E2EBF3;--brd:#DDE6EF;
+--ok:#10B981;--warn:#F59E0B;--err:#EF4444;
+--gold:#D97706;--pur:#7C3AED;--grn:#059669;
+--r:12px;--r2:18px;--r3:24px;
+}
+::-webkit-scrollbar{width:4px}
+::-webkit-scrollbar-thumb{background:var(--c);border-radius:2px}
+
+/* TOPBAR */
+#tb{background:var(--dk);color:rgba(255,255,255,.7);font-size:11px;text-align:center;padding:7px 14px;width:100%}
+#tb b{color:var(--c)}
+
+/* HEADER */
+#hd{position:sticky;top:0;z-index:200;background:#fff;border-bottom:1px solid var(--brd);box-shadow:0 1px 4px rgba(0,0,0,.06)}
+.hi{display:flex;align-items:center;gap:8px;padding:0 12px;height:58px}
+.lb{display:flex;align-items:center;gap:7px;cursor:pointer;flex-shrink:0}
+.lsvg{width:34px;height:34px;flex-shrink:0}
+.lname{font-weight:800;font-size:15px;color:var(--dk);letter-spacing:2px}
+.lsub{font-size:8px;color:var(--c);letter-spacing:1px;font-weight:600}
+.hs{flex:1;min-width:0;position:relative}
+.hs input{width:100%;background:var(--bg);border:1.5px solid var(--brd);border-radius:10px;padding:8px 10px 8px 32px;font-size:13px;outline:none}
+.hs input:focus{border-color:var(--c)}
+.sico{position:absolute;left:10px;top:50%;transform:translateY(-50%);font-size:13px;color:var(--g2)}
+.hico{position:relative;width:38px;height:38px;border-radius:10px;background:var(--bg);border:1.5px solid var(--brd);display:flex;align-items:center;justify-content:center;font-size:17px;cursor:pointer;flex-shrink:0}
+.hbg{position:absolute;top:-5px;right:-5px;background:var(--err);color:#fff;width:17px;height:17px;border-radius:50%;font-size:9px;font-weight:700;display:none;align-items:center;justify-content:center;border:2px solid #fff}
+.hbg.on{display:flex}
+.lbtn{background:var(--bg);border:1.5px solid var(--brd);border-radius:9px;padding:7px 9px;font-size:11px;font-weight:700;cursor:pointer;color:var(--dk2);flex-shrink:0}
+
+/* BOTTOM NAV */
+#bn{position:fixed;bottom:0;left:0;right:0;z-index:300;background:#fff;border-top:1px solid var(--brd);display:flex;box-shadow:0 -4px 20px rgba(0,0,0,.08)}
+.ni{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:10px 2px 8px;cursor:pointer;position:relative;gap:2px;-webkit-tap-highlight-color:transparent}
+.ni .ico{font-size:18px;line-height:1;transition:transform .15s}
+.ni .lbl{font-size:9px;font-weight:700;color:var(--g2);white-space:nowrap}
+.ni.on .lbl{color:var(--c)}
+.ni.on .ico{transform:translateY(-2px)}
+.ni::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:0;height:3px;background:var(--c);border-radius:0 0 3px 3px;transition:width .2s}
+.ni.on::before{width:28px}
+.nd{position:absolute;top:8px;right:calc(50% - 14px);width:8px;height:8px;background:var(--err);border-radius:50%;border:2px solid #fff;display:none}
+.nd.on{display:block}
+
+/* PAGES */
+.pg{display:none;width:100%;min-height:calc(100vh - 138px)}
+.pg.on{display:block;animation:fi .2s ease}
+@keyframes fi{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:translateY(0)}}
+
+/* UTILS */
+.w{padding:0 14px}
+.sh{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+.st{font-weight:700;font-size:17px;color:var(--dk)}
+.sl{font-size:13px;color:var(--c);font-weight:600;cursor:pointer}
+.sp{height:20px}
+
+/* BUTTONS */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;border-radius:10px;font-size:13px;font-weight:700;padding:11px 20px;cursor:pointer;border:none;font-family:inherit;-webkit-tap-highlight-color:transparent}
+.bc{background:var(--c);color:#fff}
+.bdk{background:rgba(255,255,255,.12);color:#fff;border:1.5px solid rgba(255,255,255,.2)}
+.bo{background:transparent;border:1.5px solid var(--brd);color:var(--dk2)}
+.bg{background:linear-gradient(135deg,var(--gold),#F59E0B);color:#fff}
+.bp{background:linear-gradient(135deg,var(--pur),#9333EA);color:#fff}
+.bgr{background:linear-gradient(135deg,var(--grn),#10B981);color:#fff}
+.bf{width:100%}
+.blg{padding:14px 24px;font-size:15px;border-radius:12px}
+.bsm{padding:7px 13px;font-size:12px}
+
+/* HERO */
+.hb{background:linear-gradient(135deg,var(--dk),#1a3a5c);border-radius:0 0 24px 24px;padding:26px 18px 30px;position:relative;overflow:hidden}
+.hb::after{content:'';position:absolute;left:-40px;top:-40px;width:180px;height:180px;background:radial-gradient(circle,rgba(26,188,238,.2),transparent 70%);pointer-events:none}
+.htag{display:inline-flex;align-items:center;gap:6px;background:rgba(26,188,238,.15);border:1px solid rgba(26,188,238,.3);border-radius:100px;padding:4px 12px;font-size:11px;color:var(--c);font-weight:700;margin-bottom:10px}
+.hd2{width:6px;height:6px;background:var(--c);border-radius:50%;animation:bk 2s infinite}
+@keyframes bk{0%,100%{opacity:1}50%{opacity:.2}}
+.hb h1{font-weight:800;font-size:clamp(21px,5.5vw,30px);color:#fff;line-height:1.2;margin-bottom:7px}
+.hb h1 em{font-style:normal;color:var(--c)}
+.hb p{color:rgba(255,255,255,.6);font-size:13px;line-height:1.6;margin-bottom:18px}
+.hbts{display:flex;gap:10px;flex-wrap:wrap}
+.sr{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--bg2);border-radius:var(--r2);overflow:hidden;margin-top:18px}
+.si2{background:#fff;padding:13px 6px;text-align:center}
+.si2 h3{font-weight:800;font-size:17px;color:var(--c)}
+.si2 p{font-size:10px;color:var(--g);margin-top:1px}
+
+/* CATS */
+.csc{display:flex;gap:9px;overflow-x:auto;padding:0 14px 4px;-webkit-overflow-scrolling:touch}
+.csc::-webkit-scrollbar{display:none}
+.cc{flex-shrink:0;background:#fff;border:1.5px solid var(--brd);border-radius:var(--r2);padding:13px 11px;text-align:center;cursor:pointer;transition:all .2s;min-width:82px}
+.cc.on,.cc:active{border-color:var(--c);background:var(--cbg);transform:translateY(-2px)}
+.ci{font-size:23px;margin-bottom:4px}
+.cn{font-size:11px;font-weight:700;color:var(--dk)}
+.cct{font-size:10px;color:var(--g2);margin-top:1px}
+
+/* PRODUCT CARD */
+.pg2{display:grid;grid-template-columns:1fr 1fr;gap:11px;padding:0 14px}
+@media(min-width:600px){.pg2{grid-template-columns:repeat(3,1fr)}}
+@media(min-width:900px){.pg2{grid-template-columns:repeat(4,1fr)}}
+.pc{background:#fff;border:1.5px solid var(--brd);border-radius:var(--r2);overflow:hidden;display:flex;flex-direction:column;cursor:pointer}
+.pc:active{transform:scale(.98)}
+.pct{padding:12px 12px 0;display:flex;justify-content:space-between;align-items:flex-start}
+.pci{width:44px;height:44px;background:var(--bg);border-radius:11px;display:flex;align-items:center;justify-content:center;font-size:20px;border:1px solid var(--brd);flex-shrink:0}
+.bdg{border-radius:6px;padding:2px 6px;font-size:10px;font-weight:700}
+.bh{background:#FEF2F2;color:var(--err)}
+.bn2{background:#EFF6FF;color:#3B82F6}
+.bs{background:#FFFBEB;color:var(--gold)}
+.bpp{background:var(--cbg);color:var(--c2)}
+.pcb{padding:9px 12px;flex:1}
+.pcv{font-size:10px;color:var(--g2);font-weight:600;text-transform:uppercase;letter-spacing:.7px;margin-bottom:2px}
+.pcn{font-weight:700;font-size:13px;color:var(--dk);margin-bottom:4px;line-height:1.3}
+.pcd{font-size:11px;color:var(--g2);line-height:1.4;margin-bottom:6px}
+.pctg{display:flex;flex-wrap:wrap;gap:3px;margin-bottom:6px}
+.pt2{background:var(--bg);border:1px solid var(--brd);border-radius:5px;padding:2px 5px;font-size:10px;color:var(--g)}
+.pcr{display:flex;align-items:center;gap:4px;font-size:11px}
+.st2{color:var(--warn)}
+.rv{font-weight:700;color:var(--dk)}
+.rc{color:var(--g2)}
+.pcf{padding:9px 12px;border-top:1px solid var(--brd);display:flex;align-items:center;justify-content:space-between;gap:6px}
+.pp{font-weight:800;font-size:15px;color:var(--dk);line-height:1}
+.ppo{font-size:10px;color:var(--g2);text-decoration:line-through}
+.psar{font-size:10px;color:var(--c);font-weight:700}
+.ba{background:var(--c);color:#fff;border:none;border-radius:8px;padding:8px 11px;font-size:12px;font-weight:700;cursor:pointer;white-space:nowrap;flex-shrink:0;font-family:inherit}
+.ba:active{background:var(--c2);transform:scale(.96)}
+
+/* FLASH BAR */
+.fb{background:var(--dk);border-radius:var(--r);padding:12px 14px;display:flex;align-items:center;justify-content:space-between;margin:0 14px;flex-wrap:wrap;gap:8px}
+.fl{display:flex;align-items:center;gap:9px}
+.ff{font-size:19px}
+.ft h4{font-weight:800;font-size:13px;color:#fff}
+.ft p{font-size:10px;color:rgba(255,255,255,.5)}
+.tm{display:flex;align-items:center;gap:4px}
+.tu{text-align:center;background:rgba(26,188,238,.2);border-radius:6px;padding:4px 6px}
+.tn{display:block;font-weight:800;font-size:17px;color:var(--c);line-height:1}
+.tl{display:block;font-size:8px;color:rgba(255,255,255,.4);margin-top:1px}
+.ts{color:rgba(255,255,255,.3);font-weight:700;font-size:15px}
+
+/* TRUST */
+.tg{display:grid;grid-template-columns:1fr 1fr;gap:9px;padding:0 14px}
+@media(min-width:600px){.tg{grid-template-columns:repeat(3,1fr)}}
+.tc{background:#fff;border:1.5px solid var(--brd);border-radius:var(--r);padding:13px 11px;text-align:center}
+.tic{font-size:21px;margin-bottom:5px}
+.ttl{font-size:12px;font-weight:700;color:var(--dk);margin-bottom:2px}
+.tds{font-size:10px;color:var(--g2);line-height:1.4}
+
+/* REVIEWS */
+.rsc{display:flex;gap:11px;overflow-x:auto;padding:0 14px 4px;-webkit-overflow-scrolling:touch}
+.rsc::-webkit-scrollbar{display:none}
+.rvc{flex-shrink:0;width:235px;background:#fff;border:1.5px solid var(--brd);border-radius:var(--r2);padding:13px}
+.rvh{display:flex;align-items:center;gap:9px;margin-bottom:8px}
+.rva{width:33px;height:33px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:12px;color:#fff;flex-shrink:0}
+.rvn{font-weight:700;font-size:12px;color:var(--dk)}
+.rvr{font-size:10px;color:var(--g2)}
+.rvs{color:var(--warn);font-size:11px}
+.rvt{font-size:12px;color:var(--g);line-height:1.5}
+
+/* BRANDS */
+.brs{display:flex;gap:18px;overflow-x:auto;padding:0 14px;-webkit-overflow-scrolling:touch}
+.brs::-webkit-scrollbar{display:none}
+.bri{flex-shrink:0;font-weight:800;font-size:13px;color:var(--g2);white-space:nowrap}
+
+/* STORE */
+.stb{background:#fff;border-bottom:1px solid var(--brd);padding:9px 14px;display:flex;align-items:center;gap:7px;position:sticky;top:58px;z-index:100}
+.stb input{flex:1;background:var(--bg);border:1.5px solid var(--brd);border-radius:10px;padding:9px 11px;font-size:13px;outline:none}
+.stb input:focus{border-color:var(--c)}
+.fbtn{background:var(--bg);border:1.5px solid var(--brd);border-radius:10px;padding:9px 11px;font-size:12px;font-weight:700;color:var(--g);cursor:pointer;white-space:nowrap;flex-shrink:0;font-family:inherit}
+.tr{display:flex;gap:7px;overflow-x:auto;padding-bottom:3px;-webkit-overflow-scrolling:touch}
+.tr::-webkit-scrollbar{display:none}
+.tp{flex-shrink:0;background:#fff;border:1.5px solid var(--brd);border-radius:100px;padding:6px 13px;font-size:12px;font-weight:600;color:var(--g);cursor:pointer;white-space:nowrap;font-family:inherit}
+.tp.on,.tp:active{background:var(--c);border-color:var(--c);color:#fff}
+
+/* DRAWER */
+.dov{position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:400;display:none;align-items:flex-end}
+.dov.on{display:flex}
+.drw{background:#fff;border-radius:24px 24px 0 0;width:100%;padding:20px 18px 34px;max-height:85vh;overflow-y:auto}
+.dh{width:36px;height:4px;background:var(--brd);border-radius:2px;margin:0 auto 16px}
+.dtt{font-weight:700;font-size:17px;color:var(--dk);margin-bottom:16px}
+.fsc{margin-bottom:16px}
+.fsc h4{font-size:12px;font-weight:700;color:var(--dk);text-transform:uppercase;letter-spacing:.7px;margin-bottom:8px}
+.fch{display:flex;flex-wrap:wrap;gap:7px}
+.fc2{background:var(--bg);border:1.5px solid var(--brd);border-radius:100px;padding:6px 13px;font-size:12px;font-weight:600;color:var(--g);cursor:pointer;font-family:inherit}
+.fc2.on,.fc2:active{background:var(--c);border-color:var(--c);color:#fff}
+.sos{display:flex;flex-direction:column;gap:7px}
+.soo{background:var(--bg);border:1.5px solid var(--brd);border-radius:10px;padding:11px 13px;cursor:pointer;font-size:13px;color:var(--dk2);font-family:inherit;text-align:right}
+.soo.on,.soo:active{border-color:var(--c);background:var(--cbg);color:var(--c);font-weight:600}
+
+/* SOLUTIONS */
+.solh{background:linear-gradient(135deg,#1a0a3c,#2d1060,#0d2d5a);padding:24px 18px}
+.sltw{background:#fff;border-bottom:1px solid var(--brd);overflow-x:auto;-webkit-overflow-scrolling:touch;display:flex;position:sticky;top:58px;z-index:100}
+.sltw::-webkit-scrollbar{display:none}
+.slt{flex-shrink:0;padding:12px 13px;font-size:12px;font-weight:700;cursor:pointer;color:var(--g);background:#fff;border:none;border-bottom:3px solid transparent;white-space:nowrap;font-family:inherit}
+.slt.on{color:var(--c);border-bottom-color:var(--c)}
+.slc{display:none}
+.slc.on{display:block}
+.svg2{display:grid;grid-template-columns:1fr;gap:11px;padding:13px}
+@media(min-width:560px){.svg2{grid-template-columns:1fr 1fr}}
+.svc{border:1.5px solid var(--brd);border-radius:var(--r2);padding:16px;background:#fff;position:relative;overflow:hidden;cursor:pointer}
+.svc:active{background:var(--bg)}
+.svu::before{content:'إلزامي';position:absolute;top:9px;left:9px;background:var(--err);color:#fff;font-size:10px;font-weight:700;border-radius:6px;padding:2px 7px}
+.svh::before{content:'الأكثر طلباً';position:absolute;top:9px;left:9px;background:var(--warn);color:#fff;font-size:10px;font-weight:700;border-radius:6px;padding:2px 7px}
+.sico{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:21px;margin-bottom:10px}
+.snm{font-weight:800;font-size:14px;color:var(--dk);margin-bottom:4px}
+.sds{font-size:12px;color:var(--g);line-height:1.5;margin-bottom:10px}
+.stgs{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:10px}
+.stg{background:var(--bg);border:1px solid var(--brd);border-radius:6px;padding:2px 7px;font-size:10px;color:var(--g)}
+.spr{display:flex;align-items:center;justify-content:space-between;gap:7px;flex-wrap:wrap}
+.sf{font-size:10px;color:var(--g2);margin-bottom:1px}
+.sp2{font-weight:800;font-size:15px;color:var(--dk)}
+
+/* ZATCA */
+.zc{background:linear-gradient(135deg,#FFF7ED,#FFFBEB);border:2px solid var(--gold);border-radius:var(--r2);padding:16px;margin:13px;position:relative;overflow:hidden}
+.zc::before{content:'⚠️ إلزامي';position:absolute;top:0;left:0;background:var(--err);color:#fff;font-size:11px;font-weight:700;padding:4px 11px;border-radius:0 0 10px 0}
+.zt{font-weight:800;font-size:15px;color:#92400E;margin-bottom:4px;margin-top:6px}
+.zph{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-bottom:12px}
+.zp{background:#fff;border:1.5px solid #F59E0B;border-radius:10px;padding:10px;text-align:center}
+.zp h4{font-weight:700;font-size:11px;color:#92400E;margin-bottom:2px}
+.zp p{font-size:10px;color:#B45309}
+
+/* ROI */
+.roic{background:#fff;border:1.5px solid var(--brd);border-radius:var(--r2);padding:15px;margin:0 13px}
+.roi-input{width:100%;background:var(--bg);border:1.5px solid var(--brd);border-radius:10px;padding:10px 11px;font-size:14px;outline:none;margin-bottom:8px;font-family:inherit}
+.roi-input:focus{border-color:var(--c)}
+.ror{background:linear-gradient(135deg,var(--cbg),#f0fdf4);border:1.5px solid var(--ok);border-radius:11px;padding:13px;text-align:center;margin-top:8px;display:none}
+.ror h3{font-weight:800;font-size:18px;color:var(--ok)}
+.ror p{font-size:11px;color:var(--g);margin-top:3px}
+
+/* COURSES */
+.cgd{display:grid;grid-template-columns:1fr;gap:10px;padding:0 13px}
+@media(min-width:560px){.cgd{grid-template-columns:1fr 1fr}}
+.crc{background:#fff;border:1.5px solid var(--brd);border-radius:var(--r2);overflow:hidden}
+.crb{height:70px;display:flex;align-items:center;justify-content:center;font-size:32px}
+.crbd{padding:12px}
+.crl{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.7px;margin-bottom:4px}
+.crn{font-weight:700;font-size:13px;color:var(--dk);margin-bottom:5px;line-height:1.3}
+.crm{display:flex;gap:7px;font-size:10px;color:var(--g2);margin-bottom:8px;flex-wrap:wrap}
+.crf{display:flex;align-items:center;justify-content:space-between}
+.crp{font-weight:800;font-size:15px;color:var(--dk)}
+.cro{font-size:10px;color:var(--g2);text-decoration:line-through;margin-bottom:1px}
+
+/* RESELLER */
+.rsh{background:linear-gradient(135deg,#1a0a3c,#4a1060);padding:20px 16px;text-align:center;border-radius:var(--r2);margin:13px;position:relative;overflow:hidden}
+.rsh h2{font-weight:800;font-size:18px;color:#fff;margin-bottom:6px}
+.rsh p{font-size:12px;color:rgba(255,255,255,.6);line-height:1.5;margin-bottom:14px}
+.tcs{display:flex;gap:10px;overflow-x:auto;padding:0 13px 4px;-webkit-overflow-scrolling:touch}
+.tcs::-webkit-scrollbar{display:none}
+.tcrd{flex-shrink:0;width:185px;background:#fff;border:2px solid var(--brd);border-radius:var(--r2);padding:15px;text-align:center}
+.tbdg{width:46px;height:46px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:21px;margin:0 auto 8px}
+.tnm{font-weight:800;font-size:14px;color:var(--dk);margin-bottom:3px}
+.tcm{font-weight:800;font-size:21px;margin-bottom:5px}
+.tdc{font-size:11px;color:var(--g);line-height:1.4;margin-bottom:7px}
+.trq{font-size:10px;color:var(--g2)}
+
+/* IT */
+.ith{background:linear-gradient(135deg,var(--dk),#1a3a5c);padding:20px 18px;text-align:center}
+.btg{display:flex;background:rgba(255,255,255,.1);border-radius:10px;padding:4px;width:fit-content;margin:0 auto 4px;gap:3px}
+.btb{padding:7px 16px;border-radius:7px;font-size:13px;font-weight:700;cursor:pointer;color:rgba(255,255,255,.6);font-family:inherit;background:none;border:none}
+.btb.on{background:#fff;color:var(--dk)}
+.ipsc{display:flex;gap:12px;overflow-x:auto;padding:13px 13px 4px;-webkit-overflow-scrolling:touch}
+.ipsc::-webkit-scrollbar{display:none}
+.ipc{flex-shrink:0;width:255px;background:#fff;border:2px solid var(--brd);border-radius:var(--r3);padding:19px 16px;position:relative;display:flex;flex-direction:column}
+.ipc.rec{border-color:var(--c);box-shadow:0 0 0 4px rgba(26,188,238,.1)}
+.iprc{position:absolute;top:-11px;left:50%;transform:translateX(-50%);background:var(--c);color:#fff;border-radius:100px;padding:3px 13px;font-size:11px;font-weight:700;white-space:nowrap}
+.ipt{display:inline-block;background:var(--cbg);color:var(--c2);border-radius:7px;padding:3px 9px;font-size:11px;font-weight:700;margin-bottom:7px}
+.ipn{font-weight:800;font-size:17px;color:var(--dk);margin-bottom:3px}
+.ipd{font-size:12px;color:var(--g);margin-bottom:10px}
+.ipp{font-weight:800;font-size:26px;color:var(--dk);margin-bottom:2px}
+.ippr{font-size:11px;color:var(--g2);margin-bottom:3px}
+.ippd{display:inline-block;background:var(--bg);border:1px solid var(--brd);border-radius:6px;padding:2px 7px;font-size:10px;color:var(--g);margin-bottom:10px}
+.ipdv{height:1px;background:var(--brd);margin-bottom:10px}
+.ipfl{display:flex;flex-direction:column;gap:6px;flex:1;margin-bottom:10px}
+.ipf{display:flex;align-items:flex-start;gap:6px;font-size:11px;color:var(--dk2)}
+.ipf::before{content:'✓';background:rgba(16,185,129,.1);color:var(--ok);width:16px;height:16px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;flex-shrink:0;margin-top:1px}
+.ipf.no{opacity:.4}
+.ipf.no::before{content:'×';background:rgba(0,0,0,.05);color:var(--g)}
+.ipsl{display:flex;align-items:center;gap:4px;font-size:11px;color:var(--g);background:var(--bg);border:1px solid var(--brd);border-radius:8px;padding:5px 9px;margin-bottom:9px}
+.adg{display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:0 13px}
+@media(min-width:700px){.adg{grid-template-columns:repeat(3,1fr)}}
+.adc{background:#fff;border:1.5px solid var(--brd);border-radius:var(--r);padding:11px;display:flex;gap:8px;align-items:flex-start;cursor:pointer}
+.adico{width:34px;height:34px;background:var(--cbg);border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0}
+.adn{font-weight:700;font-size:12px;color:var(--dk);margin-bottom:1px}
+.add2{font-size:10px;color:var(--g2);line-height:1.4}
+.adp{font-weight:700;font-size:11px;color:var(--c);margin-top:2px}
+
+/* DEALS */
+.dlh{background:linear-gradient(135deg,#1a0530,#2d1060);padding:21px 17px;text-align:center;position:relative;overflow:hidden}
+.dlh h1{font-weight:800;font-size:22px;color:#fff;margin-bottom:4px}
+
+/* CART */
+.cit{background:#fff;border:1.5px solid var(--brd);border-radius:var(--r2);padding:12px;display:flex;gap:10px;align-items:center;margin:0 13px 9px}
+.cii{width:40px;height:40px;background:var(--bg);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;border:1px solid var(--brd);flex-shrink:0}
+.cin{min-width:0;flex:1}
+.cin h4{font-weight:700;font-size:13px;color:var(--dk);margin-bottom:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.cin p{font-size:10px;color:var(--g2)}
+.cip{font-weight:800;font-size:13px;color:var(--c);flex-shrink:0;text-align:left}
+.cid{width:27px;height:27px;background:#FEF2F2;border:1px solid #FEE2E2;border-radius:7px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:12px;flex-shrink:0}
+.ctot{background:#fff;border:1.5px solid var(--brd);border-radius:var(--r2);margin:0 13px 11px;padding:14px}
+.ctr{display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px solid var(--brd);font-size:13px;color:var(--g)}
+.ctr:last-child{border-bottom:none}
+.ctr.tot{font-weight:800;font-size:15px;color:var(--dk);padding-top:11px}
+.ctr.tot span:last-child{color:var(--c)}
+.prow{display:flex;gap:7px;margin:10px 0}
+.pinp{flex:1;background:var(--bg);border:1.5px solid var(--brd);border-radius:10px;padding:9px 11px;font-size:13px;outline:none;font-family:inherit}
+.pinp:focus{border-color:var(--c)}
+.pbtn{background:var(--dk);color:#fff;border-radius:10px;padding:9px 13px;font-size:12px;font-weight:700;cursor:pointer;flex-shrink:0;border:none;font-family:inherit}
+
+/* CHECKOUT */
+.cop{background:#fff;border:1.5px solid var(--brd);border-radius:var(--r2);margin:0 13px 11px;overflow:hidden}
+.coph{padding:12px 15px;border-bottom:1px solid var(--brd);display:flex;align-items:center;gap:9px}
+.copn{width:23px;height:23px;border-radius:50%;background:var(--c);color:#fff;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0}
+.copt{font-weight:700;font-size:13px;color:var(--dk)}
+.copb{padding:13px 15px}
+.fg{margin-bottom:10px}
+.fg label{display:block;font-size:12px;font-weight:700;color:var(--dk);margin-bottom:4px}
+.fg input,.fg select{width:100%;background:var(--bg);border:1.5px solid var(--brd);border-radius:10px;padding:10px 11px;font-size:13px;color:var(--dk2);outline:none;font-family:inherit}
+.fg input:focus,.fg select:focus{border-color:var(--c)}
+.fgr{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.po2{border:1.5px solid var(--brd);border-radius:10px;padding:11px;display:flex;align-items:center;gap:9px;cursor:pointer;margin-bottom:7px}
+.po2.on{border-color:var(--c);background:var(--cbg)}
+.pr2{width:16px;height:16px;accent-color:var(--c)}
+.pl{font-weight:600;font-size:13px;flex:1}
+.cinp{background:var(--bg);border-radius:10px;padding:11px;margin-top:3px}
+.sn{background:var(--bg);border-radius:8px;padding:9px 11px;display:flex;align-items:center;gap:7px;font-size:11px;color:var(--g);margin-top:7px}
+.bp2{background:#fff;border:1.5px solid var(--brd);border-radius:var(--r2);margin:0 13px 11px;padding:13px}
+.bp2 h4{font-weight:700;font-size:12px;color:var(--dk);margin-bottom:7px}
+.bp2 p{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--g);margin-bottom:4px}
+
+/* ACCOUNT */
+.ach{background:linear-gradient(135deg,var(--dk),#1a3a5c);padding:24px 17px;text-align:center}
+.ats{display:flex;background:rgba(255,255,255,.1);border-radius:12px;padding:4px;margin-bottom:15px;gap:3px}
+.at{flex:1;padding:9px;border-radius:9px;font-size:13px;font-weight:700;cursor:pointer;color:rgba(255,255,255,.6);font-family:inherit;background:none;border:none}
+.at.on{background:#fff;color:var(--dk)}
+.af{background:#fff;border-radius:var(--r2);padding:16px;margin:0 13px;display:none}
+.af.on{display:block}
+.or{text-align:center;position:relative;margin:12px 0}
+.or::before{content:'';position:absolute;top:50%;left:0;right:0;height:1px;background:var(--brd)}
+.or span{position:relative;background:#fff;padding:0 9px;font-size:12px;color:var(--g2)}
+.sbs{display:flex;gap:7px}
+.sb{flex:1;background:var(--bg);border:1.5px solid var(--brd);border-radius:10px;padding:10px;font-size:12px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:5px;font-family:inherit}
+.dph{background:linear-gradient(135deg,var(--dk),#1a3a5c);padding:19px;display:flex;gap:12px;align-items:center}
+.dav{width:52px;height:52px;border-radius:50%;background:var(--c);display:flex;align-items:center;justify-content:center;font-size:19px;font-weight:800;color:#fff;flex-shrink:0}
+.dn{font-weight:800;font-size:16px;color:#fff;margin-bottom:2px}
+.de{font-size:12px;color:rgba(255,255,255,.55)}
+.db{display:inline-block;background:rgba(26,188,238,.25);color:var(--c);border-radius:6px;padding:2px 9px;font-size:11px;font-weight:700;margin-top:3px}
+.ml{padding:0 13px}
+.mi{background:#fff;border:1.5px solid var(--brd);border-radius:var(--r);padding:12px;margin-bottom:7px;display:flex;align-items:center;gap:10px;cursor:pointer}
+.mi:active{background:var(--bg)}
+.miico{width:36px;height:36px;border-radius:11px;background:var(--cbg);display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0}
+.mit{flex:1}
+.min{font-weight:700;font-size:13px;color:var(--dk)}
+.mid{font-size:11px;color:var(--g2);margin-top:1px}
+.mia{color:var(--g2);font-size:16px}
+
+/* TOAST */
+#tst{position:fixed;bottom:90px;left:50%;transform:translateX(-50%) translateY(20px);z-index:2000;background:var(--dk);color:#fff;border-radius:var(--r2);padding:11px 16px;display:flex;align-items:center;gap:9px;min-width:230px;max-width:88vw;opacity:0;pointer-events:none;transition:all .3s cubic-bezier(.34,1.56,.64,1);box-shadow:0 8px 32px rgba(0,0,0,.2)}
+#tst.on{opacity:1;transform:translateX(-50%) translateY(0);pointer-events:all}
+.ti{font-size:19px;flex-shrink:0}
+.t1{font-weight:700;font-size:13px}
+.t2{font-size:11px;color:rgba(255,255,255,.55);margin-top:1px}
+
+/* CHAT */
+#chat{position:fixed;bottom:88px;right:14px;z-index:250;width:46px;height:46px;background:var(--c);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:19px;cursor:pointer;box-shadow:0 4px 18px rgba(26,188,238,.5)}
+.chdot{position:absolute;top:2px;right:2px;width:11px;height:11px;background:var(--ok);border-radius:50%;border:2px solid #fff}
+
+/* NEWSLETTER */
+#nl{position:fixed;bottom:88px;left:13px;right:13px;z-index:2000;background:#fff;border:1.5px solid var(--brd);border-radius:var(--r3);padding:20px 16px;box-shadow:0 8px 32px rgba(0,0,0,.15);transform:translateY(120%);transition:transform .4s cubic-bezier(.34,1.56,.64,1);display:none}
+#nl.on{transform:translateY(0)}
+#nlx{position:absolute;top:11px;right:11px;background:var(--bg);border:none;border-radius:8px;width:25px;height:25px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:14px;color:var(--g);font-family:inherit}
+.nli{font-size:26px;text-align:center;margin-bottom:7px}
+.nlt{font-weight:800;font-size:15px;color:var(--dk);text-align:center;margin-bottom:4px}
+.nls{font-size:12px;color:var(--g2);text-align:center;margin-bottom:12px}
+.nlr{display:flex;gap:7px}
+.nlinp{flex:1;background:var(--bg);border:1.5px solid var(--brd);border-radius:10px;padding:9px 11px;font-size:13px;outline:none;font-family:inherit}
+.nlinp:focus{border-color:var(--c)}
+
+/* PAGE HDR */
+.pgh{background:#fff;border-bottom:1px solid var(--brd);padding:12px 18px;display:flex;align-items:center;gap:10px;position:sticky;top:58px;z-index:100}
+.pgb{width:32px;height:32px;border-radius:10px;background:var(--bg);border:1.5px solid var(--brd);display:flex;align-items:center;justify-content:center;font-size:14px;cursor:pointer;flex-shrink:0;font-family:inherit;background-color:var(--bg)}
+.pgt{font-weight:700;font-size:15px;color:var(--dk)}
+
+/* EMPTY */
+.es{text-align:center;padding:44px 18px}
+.esi{font-size:40px;margin-bottom:10px}
+.est{font-weight:700;font-size:16px;color:var(--dk);margin-bottom:5px}
+.esd{font-size:13px;color:var(--g2);margin-bottom:15px}
+
+/* PROMO TILE */
+.stl{border-radius:var(--r2);padding:14px;cursor:pointer;position:relative;overflow:hidden}
+.stl h4{font-weight:700;font-size:12px;color:#fff;margin-bottom:2px}
+.stl p{font-size:11px;color:rgba(255,255,255,.5)}
+.stls{padding:0 13px;display:grid;grid-template-columns:1fr 1fr;gap:9px}
+
+/* CHIP */
+.chip{display:inline-flex;align-items:center;gap:4px;background:var(--cbg);color:var(--c2);border-radius:100px;padding:4px 11px;font-size:11px;font-weight:700}
+</style>
+</head>
+<body>
+
+<div id="tb">⚡ خصم حتى <b>65%</b> · كود: <b>SOE25</b> · امتثال ZATCA — <b>احجز الآن</b></div>
+
+<header id="hd">
+<div class="hi">
+  <div class="lb" onclick="go('home')">
+    <svg class="lsvg" viewBox="0 0 80 80" fill="none">
+      <path d="M40 8L65 22V58L40 72L15 58V22Z" stroke="#64748B" stroke-width="3.5" fill="none" stroke-linejoin="round"/>
+      <circle cx="40" cy="8" r="3.5" fill="none" stroke="#64748B" stroke-width="2.2"/>
+      <circle cx="65" cy="22" r="3.5" fill="none" stroke="#64748B" stroke-width="2.2"/>
+      <circle cx="65" cy="58" r="3.5" fill="none" stroke="#64748B" stroke-width="2.2"/>
+      <circle cx="40" cy="72" r="3.5" fill="none" stroke="#64748B" stroke-width="2.2"/>
+      <circle cx="15" cy="58" r="3.5" fill="none" stroke="#64748B" stroke-width="2.2"/>
+      <circle cx="15" cy="22" r="3.5" fill="none" stroke="#64748B" stroke-width="2.2"/>
+      <path d="M54 15L70 40L54 65L26 65L10 40L26 15Z" stroke="#1ABCEE" stroke-width="3.5" fill="none" stroke-linejoin="round" transform="rotate(30,40,40)"/>
+      <circle cx="57" cy="11" r="4" fill="#1ABCEE"/>
+      <circle cx="16" cy="32" r="4" fill="#1ABCEE"/>
+      <circle cx="64" cy="56" r="3" fill="#1ABCEE" opacity=".6"/>
+    </svg>
+    <div style="display:flex;flex-direction:column;line-height:1">
+      <span class="lname">SOE</span>
+      <span class="lsub">Springs Of Expertise</span>
+    </div>
+  </div>
+  <div class="hs">
+    <span class="sico">🔍</span>
+    <input type="text" placeholder="ابحث عن برامج وخدمات..." id="hsi" oninput="doSearch(this.value)" onfocus="go('store')">
+  </div>
+  <div class="hico" onclick="go('cart')">🛒<div class="hbg" id="cbdg">0</div></div>
+  <button class="lbtn" id="langBtn" onclick="toggleLang()">EN</button>
+</div>
+</header>
+
+<!-- HOME PAGE -->
+<div id="pg-home" class="pg on">
+<div class="hb">
+  <div class="htag"><span class="hd2"></span>موثوق من 50,000+ عميل</div>
+  <h1>رخص البرمجيات<br><em>وحلول الأعمال</em></h1>
+  <p>رخص أصلية، امتثال ZATCA، دعم تقني وتدريب — كل ما تحتاجه شركتك بأسعار الريال السعودي</p>
+  <div class="hbts">
+    <button class="btn bc" onclick="go('store')">🛍 المتجر</button>
+    <button class="btn bdk" onclick="go('solutions')">💡 الحلول</button>
+  </div>
+  <div class="sr">
+    <div class="si2"><h3>50K+</h3><p>عميل</p></div>
+    <div class="si2"><h3>500+</h3><p>شركة</p></div>
+    <div class="si2"><h3>43+</h3><p>منتج</p></div>
+    <div class="si2"><h3>24/7</h3><p>دعم</p></div>
+  </div>
+</div>
+
+<!-- ZATCA Banner -->
+<div style="background:linear-gradient(135deg,#FFF7ED,#FFFBEB);border:2px solid #D97706;border-radius:var(--r2);padding:13px;margin:13px;position:relative;overflow:hidden;cursor:pointer" onclick="go('solutions');setTimeout(function(){sSolTab('zatca')},80)">
+  <div style="position:absolute;top:0;left:0;background:var(--err);color:#fff;font-size:10px;font-weight:700;padding:3px 9px;border-radius:0 0 10px 0">⚠️ إلزامي</div>
+  <div style="display:flex;align-items:center;gap:11px;flex-wrap:wrap;padding-top:4px">
+    <div style="font-size:26px">🧾</div>
+    <div style="flex:1">
+      <div style="font-weight:800;font-size:13px;color:#92400E;margin-bottom:2px">ZATCA فاتورة — التزم الآن</div>
+      <div style="font-size:11px;color:#92400E;opacity:.8">المرحلة الثانية إلزامية على جميع الشركات في السعودية</div>
+    </div>
+    <div style="background:var(--gold);color:#fff;border-radius:9px;padding:7px 12px;font-size:11px;font-weight:700;white-space:nowrap;flex-shrink:0">احجز →</div>
+  </div>
+</div>
+
+<!-- Categories -->
+<div style="padding:16px 0 0">
+  <div class="w sh"><div class="st">تصفح الفئات</div><div class="sl" onclick="go('store')">عرض الكل ←</div></div>
+  <div class="csc">
+    <div class="cc on" onclick="goStore('all',this)"><div class="ci">🧩</div><div class="cn">الكل</div><div class="cct">43+</div></div>
+    <div class="cc" onclick="goStore('os',this)"><div class="ci">🖥</div><div class="cn">ويندوز</div><div class="cct">6</div></div>
+    <div class="cc" onclick="goStore('office',this)"><div class="ci">📄</div><div class="cn">أوفيس</div><div class="cct">9</div></div>
+    <div class="cc" onclick="goStore('creative',this)"><div class="ci">🎨</div><div class="cn">تصميم</div><div class="cct">8</div></div>
+    <div class="cc" onclick="goStore('security',this)"><div class="ci">🛡</div><div class="cn">أمان</div><div class="cct">10</div></div>
+    <div class="cc" onclick="goStore('dev',this)"><div class="ci">⚙️</div><div class="cn">مطورون</div><div class="cct">6</div></div>
+    <div class="cc" onclick="goStore('edu',this)"><div class="ci">📚</div><div class="cn">تعليم</div><div class="cct">4</div></div>
+  </div>
+</div>
+
+<!-- Flash -->
+<div style="padding:13px 0 0">
+  <div class="fb">
+    <div class="fl"><div class="ff">🔥</div><div class="ft"><h4>عروض محدودة</h4><p>اليوم فقط</p></div></div>
+    <div class="tm">
+      <div class="tu"><span class="tn" id="th">08</span><span class="tl">س</span></div>
+      <span class="ts">:</span>
+      <div class="tu"><span class="tn" id="tm">34</span><span class="tl">د</span></div>
+      <span class="ts">:</span>
+      <div class="tu"><span class="tn" id="ts">22</span><span class="tl">ث</span></div>
+    </div>
+  </div>
+</div>
+
+<div style="height:13px"></div>
+<div class="w sh"><div class="st">🔥 عروض اليوم</div><div class="sl" onclick="go('deals')">كل العروض ←</div></div>
+<div class="pg2" id="hFlash"></div>
+
+<!-- Sol Tiles -->
+<div style="height:13px"></div>
+<div class="stls">
+  <div class="stl" style="background:linear-gradient(135deg,#1a0a3c,#4a1060)" onclick="go('solutions');setTimeout(function(){sSolTab('zatca')},80)">
+    <div style="font-size:24px;margin-bottom:5px">🧾</div><h4>امتثال ZATCA</h4><p>من 6,750 ر.س</p>
+  </div>
+  <div class="stl" style="background:linear-gradient(135deg,#064e3b,#065f46)" onclick="go('solutions');setTimeout(function(){sSolTab('training')},80)">
+    <div style="font-size:24px;margin-bottom:5px">🎓</div><h4>تدريب تقني</h4><p>من 1,313 ر.س</p>
+  </div>
+  <div class="stl" style="background:linear-gradient(135deg,#7c2d12,#991b1b)" onclick="go('solutions');setTimeout(function(){sSolTab('reseller')},80)">
+    <div style="font-size:24px;margin-bottom:5px">🤝</div><h4>برنامج الموزعين</h4><p>عمولة حتى 25%</p>
+  </div>
+  <div class="stl" style="background:linear-gradient(135deg,#064e3b,#065f46)" onclick="go('solutions');setTimeout(function(){sSolTab('whatsapp')},80)">
+    <div style="font-size:24px;margin-bottom:5px">💬</div><h4>واتساب بيزنس</h4><p>من 1,875 ر.س/شهر</p>
+  </div>
+</div>
+
+<div style="height:13px"></div>
+<div class="w sh"><div class="st">🏆 الأكثر مبيعاً</div><div class="sl" onclick="go('store')">عرض الكل ←</div></div>
+<div class="pg2" id="hBest"></div>
+
+<div style="height:13px"></div>
+<div class="w sh"><div class="st">علاماتنا التجارية</div></div>
+<div class="brs">
+  <div class="bri">Microsoft</div><div class="bri">Adobe</div><div class="bri">Autodesk</div>
+  <div class="bri">Kaspersky</div><div class="bri">JetBrains</div><div class="bri">NordVPN</div>
+  <div class="bri">Bitdefender</div><div class="bri">Corel</div>
+</div>
+
+<div style="height:13px"></div>
+<div class="w sh"><div class="st">لماذا SOE</div></div>
+<div class="tg">
+  <div class="tc"><div class="tic">🔑</div><div class="ttl">رخص أصلية 100%</div><div class="tds">مفاتيح موثوقة وحقيقية</div></div>
+  <div class="tc"><div class="tic">⚡</div><div class="ttl">تسليم فوري</div><div class="tds">المفتاح خلال دقيقتين</div></div>
+  <div class="tc"><div class="tic">🧾</div><div class="ttl">خبراء ZATCA</div><div class="tds">متخصصون في الفوترة</div></div>
+  <div class="tc"><div class="tic">🛡</div><div class="ttl">معتمدو NCA</div><div class="tds">الأمن السيبراني</div></div>
+  <div class="tc"><div class="tic">🔄</div><div class="ttl">استبدال مجاني</div><div class="tds">ضمان إذا لم يعمل</div></div>
+  <div class="tc"><div class="tic">💬</div><div class="ttl">دعم عربي 24/7</div><div class="tds">فريق متخصص دائماً</div></div>
+</div>
+
+<div style="height:13px"></div>
+<div class="w sh"><div class="st">آراء العملاء</div><div style="font-size:12px;color:var(--g2)">4.9★ · 12,000+</div></div>
+<div class="rsc" id="hRevs"></div>
+<div class="sp"></div>
+</div>
+
+<!-- STORE PAGE -->
+<div id="pg-store" class="pg">
+  <div class="stb">
+    <input type="text" placeholder="ابحث عن منتج..." id="stSrch" oninput="fStore()">
+    <button class="fbtn" onclick="oDrw()">⚙️ فلتر</button>
+  </div>
+  <div style="padding:9px 0 0">
+    <div class="tr" style="padding:0 13px 4px" id="stPills">
+      <button class="tp on" data-cat="all" onclick="sPill(this,'all')">🧩 الكل</button>
+      <button class="tp" data-cat="os" onclick="sPill(this,'os')">🖥 ويندوز</button>
+      <button class="tp" data-cat="office" onclick="sPill(this,'office')">📄 أوفيس</button>
+      <button class="tp" data-cat="creative" onclick="sPill(this,'creative')">🎨 تصميم</button>
+      <button class="tp" data-cat="security" onclick="sPill(this,'security')">🛡 أمان</button>
+      <button class="tp" data-cat="dev" onclick="sPill(this,'dev')">⚙️ مطورون</button>
+      <button class="tp" data-cat="edu" onclick="sPill(this,'edu')">📚 تعليم</button>
+    </div>
+  </div>
+  <div style="padding:8px 13px 5px;display:flex;align-items:center;justify-content:space-between">
+    <div style="font-size:12px;color:var(--g2)"><strong id="stCnt" style="color:var(--dk)">43</strong> منتج</div>
+    <select id="stSort" onchange="fStore()" style="background:var(--bg);border:1.5px solid var(--brd);border-radius:9px;padding:6px 9px;font-size:12px;outline:none;font-family:inherit">
+      <option value="feat">مميز</option>
+      <option value="low">سعر ↑</option>
+      <option value="high">سعر ↓</option>
+      <option value="rating">الأعلى تقييماً</option>
+    </select>
+  </div>
+  <div class="pg2" id="stGrid"></div>
+  <div class="sp"></div>
+</div>
+
+<!-- FILTER DRAWER -->
+<div class="dov" id="fDov" onclick="if(event.target===this)cDrw()">
+  <div class="drw">
+    <div class="dh"></div>
+    <div class="dtt">فلتر وترتيب</div>
+    <div class="fsc">
+      <h4>الفئة</h4>
+      <div class="fch">
+        <button class="fc2 on" onclick="dCat(this,'all')">الكل</button>
+        <button class="fc2" onclick="dCat(this,'os')">ويندوز</button>
+        <button class="fc2" onclick="dCat(this,'office')">أوفيس</button>
+        <button class="fc2" onclick="dCat(this,'creative')">تصميم</button>
+        <button class="fc2" onclick="dCat(this,'security')">أمان</button>
+        <button class="fc2" onclick="dCat(this,'dev')">مطورون</button>
+        <button class="fc2" onclick="dCat(this,'edu')">تعليم</button>
+      </div>
+    </div>
+    <div class="fsc">
+      <h4>الترتيب</h4>
+      <div class="sos">
+        <button class="soo on" onclick="dSrt(this,'feat')">مميز</button>
+        <button class="soo" onclick="dSrt(this,'low')">سعر: من الأقل</button>
+        <button class="soo" onclick="dSrt(this,'high')">سعر: من الأعلى</button>
+        <button class="soo" onclick="dSrt(this,'rating')">الأعلى تقييماً</button>
+      </div>
+    </div>
+    <div class="fsc">
+      <h4>نطاق السعر (ريال)</h4>
+      <div class="fch">
+        <button class="fc2 on" onclick="dPr(this,99999)">أي سعر</button>
+        <button class="fc2" onclick="dPr(this,150)">أقل من 150 ر.س</button>
+        <button class="fc2" onclick="dPr(this,300)">أقل من 300 ر.س</button>
+        <button class="fc2" onclick="dPr(this,500)">أقل من 500 ر.س</button>
+      </div>
+    </div>
+    <button class="btn bc bf blg" onclick="aDrw()">تطبيق الفلتر</button>
+  </div>
+</div>
+
+<!-- SOLUTIONS PAGE -->
+<div id="pg-solutions" class="pg">
+  <div class="solh">
+    <div class="chip" style="background:rgba(124,58,237,.2);color:#C4B5FD;margin-bottom:10px">💡 حلول الأعمال</div>
+    <h1 style="font-weight:800;font-size:clamp(19px,5vw,27px);color:#fff;margin-bottom:6px">كل ما تحتاجه شركتك</h1>
+    <p style="color:rgba(255,255,255,.6);font-size:12px;line-height:1.5">ZATCA · أمن سيبراني · تدريب · موزعون · أجهزة · استشارات · واتساب</p>
+  </div>
+  <div class="sltw" id="sltw">
+    <button class="slt on" onclick="sSolTab('zatca')">🧾 ZATCA</button>
+    <button class="slt" onclick="sSolTab('cyber')">🛡 أمان</button>
+    <button class="slt" onclick="sSolTab('training')">🎓 تدريب</button>
+    <button class="slt" onclick="sSolTab('reseller')">🤝 موزعون</button>
+    <button class="slt" onclick="sSolTab('hardware')">💻 أجهزة</button>
+    <button class="slt" onclick="sSolTab('consult')">📊 استشارات</button>
+    <button class="slt" onclick="sSolTab('whatsapp')">💬 واتساب</button>
+  </div>
+
+  <div class="slc on" id="sc-zatca">
+    <div class="zc">
+      <div class="zt">🧾 ZATCA — الفوترة الإلكترونية</div>
+      <p style="font-size:12px;color:#92400E;opacity:.8;line-height:1.5;margin-bottom:11px">المرحلة الثانية إلزامية على جميع الشركات في المملكة. نساعدك على الامتثال الكامل خلال 2-5 أيام عمل.</p>
+      <div class="zph">
+        <div class="zp"><h4>المرحلة الأولى ✅</h4><p>إصدار وحفظ الفواتير</p></div>
+        <div class="zp"><h4>المرحلة الثانية ⚡</h4><p>الربط مع ZATCA — الآن</p></div>
+      </div>
+      <button class="btn bg bf" onclick="addCart('إعداد ZATCA المرحلة الثانية','6,750 ر.س')">احجز خدمة الامتثال →</button>
+    </div>
+    <div class="svg2">
+      <div class="svc svu"><div class="sico" style="background:#FEF3C7">🧾</div><div class="snm">إعداد ZATCA المرحلة الثانية</div><div class="sds">ربط نظامك بهيئة الزكاة، تثبيت الشهادات الرقمية واختبار الاتصال الكامل.</div><div class="stgs"><span class="stg">⏱ 2-5 أيام</span><span class="stg">✅ ضمان الامتثال</span></div><div class="spr"><div><div class="sf">يبدأ من</div><div class="sp2">6,750 ر.س</div></div><button class="btn bg bsm" onclick="addCart('إعداد ZATCA المرحلة الثانية','6,750 ر.س')">احجز →</button></div></div>
+      <div class="svc"><div class="sico" style="background:#EFF6FF">🔄</div><div class="snm">دعم ZATCA الشهري</div><div class="sds">دعم شهري مستمر ومراقبة الفواتير وحل المشكلات التقنية.</div><div class="stgs"><span class="stg">📅 شهري</span></div><div class="spr"><div><div class="sf">من</div><div class="sp2">1,500 ر.س/شهر</div></div><button class="btn bc bsm" onclick="addCart('دعم ZATCA الشهري','1,500 ر.س/شهر')">اشترك</button></div></div>
+      <div class="svc"><div class="sico" style="background:#F0FDF4">🔀</div><div class="snm">ربط ERP بـ ZATCA</div><div class="sds">ربط Odoo, Zoho, SAP بهيئة الزكاة بشكل كامل ومتوافق.</div><div class="stgs"><span class="stg">Odoo</span><span class="stg">SAP</span></div><div class="spr"><div><div class="sf">من</div><div class="sp2">13,125 ر.س</div></div><button class="btn bgr bsm" onclick="addCart('ربط ERP بـ ZATCA','13,125 ر.س')">احجز →</button></div></div>
+      <div class="svc"><div class="sico" style="background:#FDF4FF">📋</div><div class="snm">تقييم امتثال PDPL</div><div class="sds">تقييم الامتثال لنظام حماية البيانات الشخصية — إلزامي للشركات.</div><div class="stgs"><span class="stg">⚖️ قانوني</span></div><div class="spr"><div><div class="sf">من</div><div class="sp2">9,375 ر.س</div></div><button class="btn bp bsm" onclick="addCart('تقييم PDPL','9,375 ر.س')">احجز →</button></div></div>
+    </div>
+    <div style="padding:0 13px 13px">
+      <div class="roic">
+        <div style="font-weight:700;font-size:14px;color:var(--dk);margin-bottom:7px">🧮 احسب مخاطرة عدم الامتثال</div>
+        <div style="font-size:12px;color:var(--g);margin-bottom:8px">غرامة ZATCA تصل إلى 187,500 ريال للفاتورة. أدخل عدد فواتيرك الشهرية:</div>
+        <input class="roi-input" type="number" placeholder="عدد الفواتير الشهرية..." id="invC" oninput="calcROI()">
+        <div class="ror" id="roiR"><h3 id="roiN"></h3><p id="roiT"></p></div>
+        <button class="btn bg bf" style="margin-top:10px" onclick="addCart('باقة ZATCA الشاملة','8,250 ر.س')">✅ احمِ شركتك — 8,250 ر.س</button>
+      </div>
+    </div>
+    <div class="sp"></div>
+  </div>
+
+  <div class="slc" id="sc-cyber">
+    <div style="background:linear-gradient(135deg,#1a0a3c,#2d1060);padding:20px 17px;text-align:center"><div style="font-size:30px;margin-bottom:7px">🛡</div><div style="font-weight:800;font-size:18px;color:#fff;margin-bottom:3px">الأمن السيبراني NCA</div><div style="font-size:12px;color:rgba(255,255,255,.6)">متطلبات الهيئة الوطنية للأمن السيبراني — إلزامية</div></div>
+    <div class="svg2">
+      <div class="svc svu"><div class="sico" style="background:#FEF2F2">🔍</div><div class="snm">تقييم ECC الوطني</div><div class="sds">تقييم شامل للضوابط الأساسية للأمن السيبراني مع تقرير الثغرات.</div><div class="stgs"><span class="stg">📋 تقرير</span><span class="stg">🏆 شهادة</span></div><div class="spr"><div><div class="sf">من</div><div class="sp2">18,750 ر.س</div></div><button class="btn bsm" style="background:var(--err);color:#fff;border-radius:8px;padding:7px 12px;font-size:12px;font-weight:700;cursor:pointer;border:none;font-family:inherit" onclick="addCart('تقييم NCA ECC','18,750 ر.س')">احجز →</button></div></div>
+      <div class="svc"><div class="sico" style="background:#FEF3C7">🔐</div><div class="snm">اختبار الاختراق</div><div class="sds">اختبار اختراق احترافي للشبكات والأنظمة مع تقرير علاج شامل.</div><div class="stgs"><span class="stg">🌐 شبكة</span><span class="stg">📱 تطبيقات</span></div><div class="spr"><div><div class="sf">من</div><div class="sp2">30,000 ر.س</div></div><button class="btn bg bsm" onclick="addCart('اختبار الاختراق','30,000 ر.س')">احجز →</button></div></div>
+      <div class="svc"><div class="sico" style="background:#EFF6FF">📊</div><div class="snm">مراقبة SOC 24/7</div><div class="sds">مراقبة مستمرة للتهديدات السيبرانية مع فريق متخصص.</div><div class="stgs"><span class="stg">24/7</span><span class="stg">🚨 تنبيه فوري</span></div><div class="spr"><div><div class="sf">من</div><div class="sp2">11,250 ر.س/شهر</div></div><button class="btn bc bsm" onclick="addCart('مراقبة SOC','11,250 ر.س/شهر')">اشترك</button></div></div>
+      <div class="svc"><div class="sico" style="background:#F0FDF4">🎓</div><div class="snm">تدريب الوعي الأمني</div><div class="sds">تدريب موظفيك على الأمن السيبراني — الفيشينج والتهديدات.</div><div class="stgs"><span class="stg">👥 للموظفين</span></div><div class="spr"><div><div class="sf">من</div><div class="sp2">750 ر.س/مستخدم</div></div><button class="btn bgr bsm" onclick="addCart('تدريب الوعي الأمني','750 ر.س/مستخدم')">احجز →</button></div></div>
+    </div>
+    <div class="sp"></div>
+  </div>
+
+  <div class="slc" id="sc-training">
+    <div style="background:linear-gradient(135deg,#064e3b,#065f46);padding:20px 17px;text-align:center"><div style="font-size:30px;margin-bottom:7px">🎓</div><div style="font-weight:800;font-size:18px;color:#fff;margin-bottom:3px">أكاديمية SOE للتدريب</div><div style="font-size:12px;color:rgba(255,255,255,.6)">شهادات معتمدة · مدربون محترفون · عربي وإنجليزي</div></div>
+    <div style="padding:10px 13px 0"><div class="tr"><button class="tp on" onclick="fCrs('all',this)">الكل</button><button class="tp" onclick="fCrs('ms',this)">مايكروسوفت</button><button class="tp" onclick="fCrs('cisco',this)">سيسكو</button><button class="tp" onclick="fCrs('sec',this)">أمان</button><button class="tp" onclick="fCrs('cloud',this)">كلاود</button><button class="tp" onclick="fCrs('biz',this)">أعمال</button></div></div>
+    <div class="cgd" id="crsGd" style="margin-top:12px"></div>
+    <div class="sp"></div>
+  </div>
+
+  <div class="slc" id="sc-reseller">
+    <div class="rsh">
+      <div style="display:inline-block;background:rgba(245,158,11,.2);color:#FCD34D;border-radius:100px;padding:3px 12px;font-size:11px;font-weight:700;margin-bottom:9px">💰 برنامج شركاء SOE</div>
+      <h2>ابن دخلاً إضافياً معنا</h2>
+      <p>200+ موزع في المملكة. عمولة فورية على كل مبيعة. لا استثمار مسبق.</p>
+      <button class="btn bg blg" onclick="toast('🤝','مرحباً!','سيتم تفعيل حساب الموزع خلال 24 ساعة')">سجل مجاناً →</button>
+    </div>
+    <div style="padding:0 13px 9px"><div style="font-weight:700;font-size:15px;color:var(--dk);margin-bottom:10px">مستويات الشراكة</div></div>
+    <div class="tcs">
+      <div class="tcrd"><div class="tbdg" style="background:#F0F0F0">🥉</div><div class="tnm">Bronze</div><div class="tcm" style="color:var(--g)">10%</div><div class="tdc">عمولة على كل رخصة تبيعها</div><div class="trq" style="color:var(--ok)">✅ بدون حد أدنى</div><div style="height:8px"></div><button class="btn bo bf bsm" onclick="toast('🤝','Bronze!','أهلاً في SOE')">انضم مجاناً</button></div>
+      <div class="tcrd" style="border-color:#C0A060"><div class="tbdg" style="background:#FEF3C7">🥈</div><div class="tnm">Silver</div><div class="tcm" style="color:var(--gold)">17%</div><div class="tdc">عمولة + دعم أولوية + تسويق</div><div class="trq">📊 18,750 ر.س/شهر</div><div style="height:8px"></div><button class="btn bg bf bsm" onclick="toast('⭐','Silver!','مبروك')">ارقَ لـ Silver</button></div>
+      <div class="tcrd" style="border-color:var(--c)"><div class="tbdg" style="background:var(--cbg)">🥇</div><div class="tnm">Gold</div><div class="tcm" style="color:var(--c)">25%</div><div class="tdc">مدير حساب خاص + أسعار حصرية</div><div class="trq">📊 75,000 ر.س/شهر</div><div style="height:8px"></div><button class="btn bc bf bsm" onclick="toast('🏆','Gold!','أنت من النخبة')">اطلب Gold</button></div>
+      <div class="tcrd" style="border-color:var(--pur)"><div class="tbdg" style="background:#F5F3FF">💎</div><div class="tnm">Platinum</div><div class="tcm" style="color:var(--pur)">مخصص</div><div class="tdc">White-label + قسم مبيعات خاص</div><div class="trq">📊 187,500+ ر.س/شهر</div><div style="height:8px"></div><button class="btn bp bf bsm" onclick="toast('💎','Platinum','سيتواصل معك فريقنا')">تواصل</button></div>
+    </div>
+    <div style="padding:13px"><div style="background:#fff;border:1.5px solid var(--brd);border-radius:var(--r2);padding:15px"><div style="font-weight:700;font-size:13px;color:var(--dk);margin-bottom:7px">🧮 احسب دخلك الشهري المتوقع</div><input class="roi-input" type="number" placeholder="كم عميل تتوقع شهرياً؟" id="rsC" oninput="calcRS()"><div class="ror" id="rsR"><h3 id="rsN"></h3><p id="rsT"></p></div></div></div>
+    <div class="sp"></div>
+  </div>
+
+  <div class="slc" id="sc-hardware">
+    <div style="background:linear-gradient(135deg,#1e3a5f,#1a3a5c);padding:20px 17px;text-align:center"><div style="font-size:30px;margin-bottom:7px">💻</div><div style="font-weight:800;font-size:18px;color:#fff;margin-bottom:3px">توريد الأجهزة</div><div style="font-size:12px;color:rgba(255,255,255,.6)">أجهزة أصلية + ضمان + تثبيت وإعداد كامل</div></div>
+    <div style="padding:10px 13px 0"><div class="tr"><button class="tp on" onclick="fHW('all',this)">الكل</button><button class="tp" onclick="fHW('laptop',this)">💻 لابتوبات</button><button class="tp" onclick="fHW('desktop',this)">🖥 ديسكتوب</button><button class="tp" onclick="fHW('network',this)">🌐 شبكات</button><button class="tp" onclick="fHW('server',this)">🗄 سيرفرات</button></div></div>
+    <div class="pg2" id="hwGd" style="margin-top:12px"></div>
+    <div style="padding:13px"><div style="background:var(--cbg);border:1.5px solid var(--c);border-radius:var(--r2);padding:13px;text-align:center"><div style="font-size:20px;margin-bottom:5px">📦</div><div style="font-weight:700;font-size:13px;color:var(--dk);margin-bottom:3px">عرض أسعار مجمّع</div><div style="font-size:12px;color:var(--g);margin-bottom:8px">تحتاج 10+ أجهزة؟ احصل على سعر خاص للشركات</div><button class="btn bc bf" onclick="toast('📋','طلب عرض سعر','سنرسل لك العرض خلال 4 ساعات')">اطلب عرض مجمّع →</button></div></div>
+    <div class="sp"></div>
+  </div>
+
+  <div class="slc" id="sc-consult">
+    <div style="background:linear-gradient(135deg,#1a2332,#2d3f5c);padding:20px 17px;text-align:center"><div style="font-size:30px;margin-bottom:7px">📊</div><div style="font-weight:800;font-size:18px;color:#fff;margin-bottom:3px">التحول الرقمي</div><div style="font-size:12px;color:rgba(255,255,255,.6)">رؤية 2030 · التحول الرقمي · استشارات الأعمال التقنية</div></div>
+    <div style="padding:13px;display:flex;flex-direction:column;gap:9px">
+      <div style="background:#fff;border:2px solid var(--gold);border-radius:var(--r2);padding:14px;display:flex;gap:10px;align-items:flex-start;position:relative">
+        <div style="position:absolute;top:8px;left:8px;background:var(--gold);color:#fff;font-size:10px;font-weight:700;border-radius:6px;padding:2px 7px">الأكثر طلباً</div>
+        <div style="width:42px;height:42px;border-radius:12px;background:#FEF3C7;display:flex;align-items:center;justify-content:center;font-size:19px;flex-shrink:0">🏆</div>
+        <div><div style="font-weight:800;font-size:13px;color:var(--dk);margin-bottom:3px">تقييم التحول الرقمي</div><div style="font-size:12px;color:var(--g);line-height:1.5;margin-bottom:7px">تقييم وضعك الرقمي + خارطة طريق رؤية 2030 — 3 جلسات + تقرير كامل.</div><div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:6px"><div style="font-weight:800;font-size:14px;color:var(--dk)">30,000 ر.س</div><button class="btn bg bsm" onclick="addCart('تقييم التحول الرقمي','30,000 ر.س')">احجز →</button></div></div>
+      </div>
+      <div style="background:#fff;border:1.5px solid var(--brd);border-radius:var(--r2);padding:14px;display:flex;gap:10px;align-items:flex-start">
+        <div style="width:42px;height:42px;border-radius:12px;background:var(--cbg);display:flex;align-items:center;justify-content:center;font-size:19px;flex-shrink:0">☁️</div>
+        <div><div style="font-weight:800;font-size:13px;color:var(--dk);margin-bottom:3px">استراتيجية الهجرة للسحابة</div><div style="font-size:12px;color:var(--g);line-height:1.5;margin-bottom:7px">Azure/AWS/Google مع تقدير التكاليف والمخاطر.</div><div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:6px"><div style="font-weight:800;font-size:14px;color:var(--dk)">45,000 ر.س</div><button class="btn bc bsm" onclick="addCart('استراتيجية هجرة السحابة','45,000 ر.س')">احجز →</button></div></div>
+      </div>
+      <div style="background:#fff;border:1.5px solid var(--brd);border-radius:var(--r2);padding:14px;display:flex;gap:10px;align-items:flex-start">
+        <div style="width:42px;height:42px;border-radius:12px;background:#F5F3FF;display:flex;align-items:center;justify-content:center;font-size:19px;flex-shrink:0">🤖</div>
+        <div><div style="font-weight:800;font-size:13px;color:var(--dk);margin-bottom:3px">استشارات الذكاء الاصطناعي</div><div style="font-size:12px;color:var(--g);line-height:1.5;margin-bottom:7px">Copilot 365, ChatGPT Enterprise في عملياتك التجارية.</div><div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:6px"><div style="font-weight:800;font-size:14px;color:var(--dk)">24,375 ر.س</div><button class="btn bp bsm" onclick="addCart('استشارات AI','24,375 ر.س')">احجز →</button></div></div>
+      </div>
+      <div style="background:#fff;border:1.5px solid var(--brd);border-radius:var(--r2);padding:14px;display:flex;gap:10px;align-items:flex-start">
+        <div style="width:42px;height:42px;border-radius:12px;background:#FEF2F2;display:flex;align-items:center;justify-content:center;font-size:19px;flex-shrink:0">📱</div>
+        <div><div style="font-weight:800;font-size:13px;color:var(--dk);margin-bottom:3px">مستشار تقني شهري</div><div style="font-size:12px;color:var(--g);line-height:1.5;margin-bottom:7px">جلسة شهرية + مراجعة القرارات التقنية لشركتك.</div><div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:6px"><div style="font-weight:800;font-size:14px;color:var(--dk)">13,125 ر.س/شهر</div><button class="btn bo bsm" onclick="addCart('مستشار تقني شهري','13,125 ر.س/شهر')">اشترك →</button></div></div>
+      </div>
+    </div>
+    <div class="sp"></div>
+  </div>
+
+  <div class="slc" id="sc-whatsapp">
+    <div style="background:linear-gradient(135deg,#064e3b,#065f46);padding:20px 17px;text-align:center"><div style="font-size:34px;margin-bottom:7px">💬</div><div style="font-weight:800;font-size:18px;color:#fff;margin-bottom:3px">واتساب بيزنس</div><div style="font-size:12px;color:rgba(255,255,255,.6)">القناة رقم 1 في السعودية · معدل فتح 98%</div></div>
+    <div style="padding:9px 13px;background:#F0FDF4;border-bottom:1px solid #BBF7D0;display:flex;gap:9px;align-items:center"><div style="font-size:16px">📊</div><div style="font-size:11px;color:#065f46"><strong>90%+</strong> من السعوديين يستخدمون واتساب يومياً · معدل فتح <strong>98%</strong> مقارنة بـ 20% للبريد</div></div>
+    <div class="svg2">
+      <div class="svc svh"><div class="sico" style="background:#DCFCE7">📡</div><div class="snm">إعداد WhatsApp Business API</div><div class="sds">ربط رقمك بـ API الرسمي مع إعداد كامل للقنوات.</div><div class="stgs"><span class="stg">✅ رسمي</span><span class="stg">⚡ 5 أيام</span></div><div class="spr"><div><div class="sf">من</div><div class="sp2">9,375 ر.س</div></div><button class="btn bgr bsm" onclick="addCart('إعداد WhatsApp API','9,375 ر.س')">احجز →</button></div></div>
+      <div class="svc"><div class="sico" style="background:#DCFCE7">🤖</div><div class="snm">شات بوت واتساب AI</div><div class="sds">بوت ذكي يرد على عملائك 24/7 ويحجز المواعيد تلقائياً.</div><div class="stgs"><span class="stg">🤖 AI</span><span class="stg">عربي/EN</span></div><div class="spr"><div><div class="sf">من</div><div class="sp2">15,000 ر.س</div></div><button class="btn bgr bsm" onclick="addCart('شات بوت واتساب','15,000 ر.س')">احجز →</button></div></div>
+      <div class="svc"><div class="sico" style="background:#DCFCE7">📢</div><div class="snm">حملات البث الجماعي</div><div class="sds">رسائل تسويقية لآلاف العملاء بشكل قانوني + Analytics.</div><div class="stgs"><span class="stg">📊 Analytics</span></div><div class="spr"><div><div class="sf">من</div><div class="sp2">1,875 ر.س/شهر</div></div><button class="btn bgr bsm" onclick="addCart('حملات البث واتساب','1,875 ر.س/شهر')">اشترك</button></div></div>
+      <div class="svc"><div class="sico" style="background:#DCFCE7">🛒</div><div class="snm">متجر واتساب Commerce</div><div class="sds">متجر إلكتروني كامل داخل واتساب — كتالوج، سلة، دفع مباشر.</div><div class="stgs"><span class="stg">🛍 كتالوج</span><span class="stg">💳 دفع</span></div><div class="spr"><div><div class="sf">من</div><div class="sp2">20,625 ر.س</div></div><button class="btn bgr bsm" onclick="addCart('متجر واتساب Commerce','20,625 ر.س')">احجز →</button></div></div>
+    </div>
+    <div class="sp"></div>
+  </div>
+</div>
+
+<!-- IT PAGE -->
+<div id="pg-it" class="pg">
+  <div class="ith">
+    <div class="chip" style="margin-bottom:10px">💼 دعم IT عن بُعد</div>
+    <h1 style="font-weight:800;font-size:clamp(19px,5vw,27px);color:#fff;margin-bottom:6px">دعم تقني للشركات</h1>
+    <p style="color:rgba(255,255,255,.6);font-size:12px;line-height:1.5;max-width:300px;margin:0 auto 13px">إدارة IT كاملة عن بُعد — بدون عقود طويلة الأمد</p>
+    <div class="btg">
+      <button class="btb on" id="billM" onclick="setBill('monthly')">شهري</button>
+      <button class="btb" id="billA" onclick="setBill('annual')">سنوي <span style="color:#86EFAC;font-size:11px">-20%</span></button>
+    </div>
+  </div>
+  <div style="padding:11px 13px 0"><div style="background:var(--cbg);border:1.5px solid var(--c);border-radius:var(--r);padding:11px;display:flex;gap:8px;align-items:flex-start"><div style="font-size:17px">✅</div><div style="font-size:12px;color:var(--dk2)"><strong>كل الباقات تشمل:</strong> Helpdesk · مكافحة الفيروسات · تحديثات OS · مراقبة الشبكة · تقرير شهري</div></div></div>
+  <div class="ipsc" id="itPkgs"></div>
+  <div style="height:12px"></div>
+  <div class="w sh"><div class="st">⚙️ إضافات اختيارية</div></div>
+  <div class="adg">
+    <div class="adc" onclick="addCart('نسخ احتياطي سحابي 1TB','+563 ر.س/شهر')"><div class="adico">☁️</div><div><div class="adn">نسخ سحابي</div><div class="add2">1TB · احتفاظ 30 يوم</div><div class="adp">+563 ر.س/شهر</div></div></div>
+    <div class="adc" onclick="addCart('إعداد VPN','+750 ر.س/شهر')"><div class="adico">🔒</div><div><div class="adn">VPN للشركة</div><div class="add2">نشر على مستوى الشركة</div><div class="adp">+750 ر.س/شهر</div></div></div>
+    <div class="adc" onclick="addCart('خط دعم هاتفي','+938 ر.س/شهر')"><div class="adico">📞</div><div><div class="adn">دعم هاتفي</div><div class="add2">خط مباشر لمهندس IT</div><div class="adp">+938 ر.س/شهر</div></div></div>
+    <div class="adc" onclick="addCart('إدارة الأجهزة المحمولة MDM','+30 ر.س/جهاز')"><div class="adico">📱</div><div><div class="adn">MDM</div><div class="add2">إدارة الأجهزة المحمولة</div><div class="adp">+30 ر.س/جهاز</div></div></div>
+    <div class="adc" onclick="addCart('تدريب أمني للموظفين','+675 ر.س/شهر')"><div class="adico">🎓</div><div><div class="adn">تدريب أمني</div><div class="add2">تدريب شهري للموظفين</div><div class="adp">+675 ر.س/شهر</div></div></div>
+    <div class="adc" onclick="addCart('خطة التعافي من الكوارث DR','+1,313 ر.س/شهر')"><div class="adico">🔁</div><div><div class="adn">خطة DR</div><div class="add2">التعافي من الكوارث</div><div class="adp">+1,313 ر.س/شهر</div></div></div>
+  </div>
+  <div style="padding:13px;margin-top:11px"><div style="background:var(--dk);border-radius:var(--r2);padding:18px;text-align:center"><div style="font-size:24px;margin-bottom:6px">📞</div><div style="font-weight:800;font-size:15px;color:#fff;margin-bottom:4px">غير متأكد من الباقة المناسبة؟</div><div style="font-size:12px;color:rgba(255,255,255,.5);margin-bottom:11px">استشارة مجانية — بدون التزام</div><button class="btn bc bf" onclick="toast('📞','تم الحجز','سنتصل بك خلال ساعة!')">جدولة مكالمة مجانية</button></div></div>
+  <div class="sp"></div>
+</div>
+
+<!-- DEALS PAGE -->
+<div id="pg-deals" class="pg">
+  <div class="dlh">
+    <div class="chip" style="background:rgba(245,158,11,.2);color:#F59E0B;margin-bottom:8px">🔥 محدود الوقت</div>
+    <h1>عروض فلاش</h1>
+    <p style="color:rgba(255,255,255,.6);font-size:13px;margin-top:3px">أكبر التخفيضات — اليوم فقط</p>
+    <div class="tm" style="justify-content:center;margin-top:12px">
+      <div class="tu"><span class="tn" id="dh">08</span><span class="tl">س</span></div>
+      <span class="ts">:</span>
+      <div class="tu"><span class="tn" id="dm">34</span><span class="tl">د</span></div>
+      <span class="ts">:</span>
+      <div class="tu"><span class="tn" id="ds">22</span><span class="tl">ث</span></div>
+    </div>
+  </div>
+  <div style="height:12px"></div>
+  <div class="w sh"><div class="st">🔥 عروض البرمجيات</div></div>
+  <div class="pg2" id="dlGd"></div>
+  <div style="height:12px"></div>
+  <div class="w sh"><div class="st">📦 باقات مجمّعة</div></div>
+  <div style="padding:0 13px;display:flex;flex-direction:column;gap:8px">
+    <div style="background:#fff;border:1.5px solid var(--brd);border-radius:var(--r2);padding:13px;display:flex;align-items:center;justify-content:space-between;gap:10px;cursor:pointer" onclick="addCart('باقة ويندوز + أوفيس','243 ر.س')">
+      <div><div style="font-weight:700;font-size:13px;color:var(--dk);margin-bottom:2px">🪟+📄 ويندوز 11 + أوفيس 2021</div><div style="font-size:11px;color:var(--g2)">ترخيص مدى الحياة لكليهما</div><div style="margin-top:5px"><span style="text-decoration:line-through;font-size:11px;color:var(--g2)">375 ر.س</span> <span style="font-weight:800;font-size:16px;color:var(--c)">243 ر.س</span></div></div>
+      <button class="ba">أضف</button>
+    </div>
+    <div style="background:#fff;border:1.5px solid var(--brd);border-radius:var(--r2);padding:13px;display:flex;align-items:center;justify-content:space-between;gap:10px;cursor:pointer" onclick="addCart('باقة الأمان الثلاثية','225 ر.س')">
+      <div><div style="font-weight:700;font-size:13px;color:var(--dk);margin-bottom:2px">🛡 باقة الأمان الثلاثية</div><div style="font-size:11px;color:var(--g2)">Kaspersky + Bitdefender + NordVPN</div><div style="margin-top:5px"><span style="text-decoration:line-through;font-size:11px;color:var(--g2)">319 ر.س</span> <span style="font-weight:800;font-size:16px;color:var(--c)">225 ر.س</span></div></div>
+      <button class="ba">أضف</button>
+    </div>
+    <div style="background:#fff;border:1.5px solid var(--brd);border-radius:var(--r2);padding:13px;display:flex;align-items:center;justify-content:space-between;gap:10px;cursor:pointer" onclick="addCart('باقة مايكروسوفت للأعمال','450 ر.س')">
+      <div><div style="font-weight:700;font-size:13px;color:var(--dk);margin-bottom:2px">☁️ باقة مايكروسوفت للأعمال</div><div style="font-size:11px;color:var(--g2)">Microsoft 365 + Teams + Azure AD</div><div style="margin-top:5px"><span style="text-decoration:line-through;font-size:11px;color:var(--g2)">638 ر.س</span> <span style="font-weight:800;font-size:16px;color:var(--c)">450 ر.س</span></div></div>
+      <button class="ba">أضف</button>
+    </div>
+  </div>
+  <div class="sp"></div>
+</div>
+
+<!-- CART PAGE -->
+<div id="pg-cart" class="pg">
+  <div class="pgh"><button class="pgb" onclick="go('home')">←</button><div class="pgt">🛒 السلة والدفع</div></div>
+  <div id="cartItms" style="padding-top:12px"></div>
+  <div id="cartWrap" style="display:none">
+    <div class="ctot">
+      <div class="prow"><input class="pinp" type="text" placeholder="كود الخصم... (جرّب SOE25)" id="promoInp"><button class="pbtn" onclick="applyPromo()">تطبيق</button></div>
+      <div id="cartTots"></div>
+    </div>
+    <div class="cop">
+      <div class="coph"><div class="copn">1</div><div class="copt">بيانات التواصل</div></div>
+      <div class="copb">
+        <div class="fgr">
+          <div class="fg"><label>الاسم الأول</label><input type="text" placeholder="أحمد"></div>
+          <div class="fg"><label>الاسم الأخير</label><input type="text" placeholder="خالد"></div>
+        </div>
+        <div class="fg"><label>البريد الإلكتروني</label><input type="email" placeholder="your@email.com"><div style="font-size:11px;color:var(--g2);margin-top:3px">مفتاح الترخيص يُرسل فوراً لهذا البريد</div></div>
+        <div class="fg"><label>الدولة</label>
+          <select>
+            <option>المملكة العربية السعودية 🇸🇦</option>
+            <option>الإمارات العربية المتحدة 🇦🇪</option>
+            <option>مصر 🇪🇬</option>
+            <option>الكويت 🇰🇼</option>
+            <option>قطر 🇶🇦</option>
+            <option>البحرين 🇧🇭</option>
+            <option>الأردن 🇯🇴</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="cop">
+      <div class="coph"><div class="copn">2</div><div class="copt">طريقة الدفع</div></div>
+      <div class="copb">
+        <label class="po2 on" onclick="selPay(this)"><input type="radio" name="pay" class="pr2" checked><span class="pl">💳 بطاقة ائتمان / خصم</span></label>
+        <label class="po2" onclick="selPay(this)"><input type="radio" name="pay" class="pr2"><span class="pl">🟢 مدى</span></label>
+        <label class="po2" onclick="selPay(this)"><input type="radio" name="pay" class="pr2"><span class="pl">🔵 STC Pay</span></label>
+        <label class="po2" onclick="selPay(this)"><input type="radio" name="pay" class="pr2"><span class="pl">💛 Apple Pay</span></label>
+        <label class="po2" onclick="selPay(this)"><input type="radio" name="pay" class="pr2"><span class="pl">🔵 PayPal</span></label>
+        <div class="cinp">
+          <div class="fg"><label style="font-size:12px">رقم البطاقة</label><input type="text" placeholder="1234 5678 9012 3456" maxlength="19" oninput="fmtCard(this)"></div>
+          <div class="fgr">
+            <div class="fg" style="margin-bottom:0"><label style="font-size:12px">الصلاحية</label><input type="text" placeholder="MM / YY" maxlength="7"></div>
+            <div class="fg" style="margin-bottom:0"><label style="font-size:12px">CVV</label><input type="text" placeholder="•••" maxlength="4"></div>
+          </div>
+        </div>
+        <div class="sn">🔒 <span>تشفير SSL 256-bit. لا نحتفظ ببيانات البطاقة.</span></div>
+      </div>
+    </div>
+    <div class="bp2">
+      <h4>🛡 ضمان المشتري</h4>
+      <p>✅ تسليم فوري أو استرداد كامل</p>
+      <p>✅ استبدال مجاني إذا لم يعمل المفتاح</p>
+      <p>✅ دعم التفعيل 24/7</p>
+      <p>✅ دفع آمن بتشفير كامل</p>
+    </div>
+    <div style="padding:0 13px 20px">
+      <button class="btn bc bf blg" onclick="placeOrder()">🔒 أتمم الطلب واستلم المفتاح →</button>
+      <p style="text-align:center;font-size:11px;color:var(--g2);margin-top:6px">بالطلب توافق على شروط الخدمة</p>
+    </div>
+  </div>
+</div>
+
+<!-- ACCOUNT PAGE -->
+<div id="pg-account" class="pg">
+  <div id="authVw">
+    <div class="ach"><div style="font-size:40px;margin-bottom:8px">👤</div><div style="font-weight:800;font-size:19px;color:#fff;margin-bottom:4px">حسابي</div><div style="font-size:12px;color:rgba(255,255,255,.55)">إدارة الطلبات والرخص والخدمات</div></div>
+    <div class="w" style="padding-top:13px">
+      <div class="ats"><button class="at on" id="tabL" onclick="swTab('l')">تسجيل الدخول</button><button class="at" id="tabR" onclick="swTab('r')">إنشاء حساب</button></div>
+    </div>
+    <div class="af on" id="fL">
+      <div class="fg"><label>البريد الإلكتروني</label><input type="email" placeholder="you@email.com"></div>
+      <div class="fg"><label>كلمة المرور</label><input type="password" placeholder="••••••••"></div>
+      <div style="text-align:left;margin-bottom:11px"><a style="font-size:12px;color:var(--c);font-weight:600">نسيت كلمة المرور؟</a></div>
+      <button class="btn bc bf blg" onclick="doLogin()">تسجيل الدخول →</button>
+      <div class="or"><span>أو</span></div>
+      <div class="sbs"><button class="sb">🔵 Google</button><button class="sb">🔷 Microsoft</button></div>
+    </div>
+    <div class="af" id="fR">
+      <div class="fgr">
+        <div class="fg"><label>الاسم الأول</label><input type="text" placeholder="أحمد"></div>
+        <div class="fg"><label>الاسم الأخير</label><input type="text" placeholder="خالد"></div>
+      </div>
+      <div class="fg"><label>البريد الإلكتروني</label><input type="email" placeholder="you@email.com"></div>
+      <div class="fg"><label>كلمة المرور</label><input type="password" placeholder="8 أحرف على الأقل"></div>
+      <div style="display:flex;align-items:flex-start;gap:6px;margin-bottom:11px;font-size:12px;color:var(--g)"><input type="checkbox" style="accent-color:var(--c);margin-top:2px"><span>أوافق على <a style="color:var(--c)">الشروط</a> و<a style="color:var(--c)">سياسة الخصوصية</a></span></div>
+      <button class="btn bc bf blg" onclick="doReg()">إنشاء حساب مجاني →</button>
+    </div>
+  </div>
+  <div id="dashVw" style="display:none">
+    <div class="dph">
+      <div class="dav">أخ</div>
+      <div><div class="dn">أحمد خالد</div><div class="de">ahmed@company.com</div><div class="db">⭐ عضو Gold</div></div>
+    </div>
+    <div style="height:12px"></div>
+    <div class="ml">
+      <div class="mi" onclick="toast('📦','طلباتي','3 رخص · خدمة واحدة نشطة')"><div class="miico">📦</div><div class="mit"><div class="min">طلباتي</div><div class="mid">3 رخص · خدمة واحدة نشطة</div></div><div class="mia">‹</div></div>
+      <div class="mi" onclick="toast('🔑','مفاتيح الرخص','عرض مفاتيح التفعيل...')"><div class="miico">🔑</div><div class="mit"><div class="min">مفاتيح الرخص</div><div class="mid">عرض وإدارة مفاتيح التفعيل</div></div><div class="mia">‹</div></div>
+      <div class="mi" onclick="toast('📍','تتبع الطلب','الطلب رقم SOE-48291 · قيد المعالجة')"><div class="miico">📍</div><div class="mit"><div class="min">تتبع الطلب</div><div class="mid">تحقق من حالة التسليم</div></div><div class="mia">‹</div></div>
+      <div class="mi" onclick="toast('🧾','لوحة ZATCA','حالة الامتثال: نشطة ✅')"><div class="miico">🧾</div><div class="mit"><div class="min">لوحة ZATCA</div><div class="mid">حالة امتثال الفوترة الإلكترونية</div></div><div class="mia">‹</div></div>
+      <div class="mi" onclick="toast('🤝','مركز الموزعين','عمولاتك هذا الشهر: 2,400 ر.س')"><div class="miico">🤝</div><div class="mit"><div class="min">مركز الموزعين</div><div class="mid">العمولات وأدوات الشراكة</div></div><div class="mia">‹</div></div>
+      <div class="mi" onclick="toast('💬','الدعم الفني','لا توجد تذاكر مفتوحة')"><div class="miico">💬</div><div class="mit"><div class="min">الدعم الفني</div><div class="mid">تواصل مع الفريق في أي وقت</div></div><div class="mia">‹</div></div>
+      <div class="mi" style="border-color:#FEE2E2" onclick="doOut()"><div class="miico" style="background:#FEF2F2">🚪</div><div class="mit"><div class="min" style="color:var(--err)">تسجيل الخروج</div><div class="mid">الخروج من الحساب</div></div></div>
+    </div>
+    <div class="sp"></div>
+  </div>
+</div>
+
+<!-- BOTTOM NAV -->
+<nav id="bn">
+  <div class="ni on" id="bn-home" onclick="go('home')"><span class="ico">🏠</span><span class="lbl">الرئيسية</span></div>
+  <div class="ni" id="bn-store" onclick="go('store')"><span class="ico">🛍</span><span class="lbl">المتجر</span></div>
+  <div class="ni" id="bn-solutions" onclick="go('solutions')"><span class="ico">💡</span><span class="lbl">الحلول</span><div class="nd on"></div></div>
+  <div class="ni" id="bn-it" onclick="go('it')"><span class="ico">💼</span><span class="lbl">دعم IT</span></div>
+  <div class="ni" id="bn-cart" onclick="go('cart')"><span class="ico">🛒</span><span class="lbl">السلة</span><div class="nd" id="cDot"></div></div>
+  <div class="ni" id="bn-account" onclick="go('account')"><span class="ico">👤</span><span class="lbl">حسابي</span></div>
+</nav>
+
+<div id="tst"><div class="ti" id="tsti">✅</div><div><div class="t1" id="tst1">تم!</div><div class="t2" id="tst2"></div></div></div>
+<div id="chat" onclick="toast('💬','الدعم المباشر','جاري التواصل مع فريق الدعم...')">💬<div class="chdot"></div></div>
+<div id="nl"><button id="nlx" onclick="closeNL()">✕</button><div class="nli">🎁</div><div class="nlt">احصل على خصم 15%</div><div class="nls">عروض حصرية وتحديثات ZATCA</div><div class="nlr"><input class="nlinp" type="email" placeholder="بريدك الإلكتروني..." id="nlInp"><button class="btn bc" onclick="subNL()">اشترك</button></div></div>
+<script>
+var PRODS=[
+{id:1,cat:'os',v:'Microsoft',ico:'🪟',name:'Windows 11 Pro (1 PC)',desc:'أحدث ويندوز للأعمال — تفعيل مدى الحياة',p:94,op:750,b:'hot',bl:'🔥 الأكثر مبيعاً',t:['1 PC','مدى الحياة'],r:4.9,rv:12400},
+{id:2,cat:'os',v:'Microsoft',ico:'🖥',name:'Windows 11 Home (1 PC)',desc:'ويندوز 11 للاستخدام المنزلي',p:75,op:521,b:'pop',bl:'⭐ شائع',t:['1 PC','مدى الحياة'],r:4.8,rv:8200},
+{id:3,cat:'os',v:'Microsoft',ico:'💻',name:'Windows 10 Pro (1 PC)',desc:'الأكثر استقراراً للشركات — دعم حتى 2028',p:68,op:671,b:'pop',bl:'⭐ شائع',t:['1 PC','مدى الحياة'],r:4.9,rv:18600},
+{id:4,cat:'os',v:'Microsoft',ico:'🔵',name:'Windows 11 Pro (5 PC) MAK',desc:'ترخيص مؤسسي لـ 5 أجهزة',p:225,op:1875,b:'new',bl:'🏢 مؤسسي',t:['5 PC','MAK Volume'],r:4.8,rv:2100},
+{id:5,cat:'os',v:'Microsoft',ico:'🗄',name:'Windows Server 2022 Standard',desc:'خادم ويندوز للشركات والشبكات',p:150,op:3750,b:'new',bl:'🆕 Server',t:['Server','مدى الحياة'],r:4.7,rv:890},
+{id:6,cat:'os',v:'Microsoft',ico:'🔒',name:'Windows Server 2025 Standard',desc:'أحدث خادم ويندوز — Azure Hybrid',p:206,op:4500,b:'new',bl:'🆕 2025',t:['Server','مدى الحياة'],r:4.8,rv:430},
+{id:7,cat:'office',v:'Microsoft',ico:'📋',name:'Office 2024 Professional Plus',desc:'أحدث إصدار أوفيس — 7 تطبيقات مدى الحياة',p:263,op:1650,b:'hot',bl:'🔥 2024',t:['1 PC','مدى الحياة','7 تطبيقات'],r:4.9,rv:3200},
+{id:8,cat:'office',v:'Microsoft',ico:'📝',name:'Office 2021 Professional Plus',desc:'وورد، إكسيل، باوربوينت، أوتلوك + أكثر',p:188,op:1313,b:'pop',bl:'⭐ الأكثر مبيعاً',t:['1 PC','مدى الحياة'],r:4.9,rv:9800},
+{id:9,cat:'office',v:'Microsoft',ico:'🏠',name:'Office 2021 Home & Student',desc:'للطلاب والمنازل — 3 تطبيقات أساسية',p:131,op:559,b:'sale',bl:'💛 تخفيض',t:['1 PC','مدى الحياة'],r:4.8,rv:6100},
+{id:10,cat:'office',v:'Microsoft',ico:'📜',name:'Office 2019 Professional Plus',desc:'إصدار 2019 المستقر والموثوق',p:113,op:938,b:'sale',bl:'💛 اقتصادي',t:['1 PC','مدى الحياة'],r:4.7,rv:7400},
+{id:11,cat:'office',v:'Microsoft',ico:'☁️',name:'Microsoft 365 Personal (1 سنة)',desc:'اشتراك سنوي + 1TB OneDrive',p:169,op:263,b:'pop',bl:'⭐ شائع',t:['1 User','1 سنة','1TB Cloud'],r:4.8,rv:5600},
+{id:12,cat:'office',v:'Microsoft',ico:'👨‍👩‍👧',name:'Microsoft 365 Family (1 سنة)',desc:'6 مستخدمين + 6TB OneDrive',p:281,op:375,b:'new',bl:'👨‍👩‍👧 عائلي',t:['6 Users','1 سنة'],r:4.8,rv:3100},
+{id:13,cat:'office',v:'Microsoft',ico:'🏢',name:'Microsoft 365 Business Standard',desc:'الباقة المثالية للشركات الصغيرة',p:244,op:563,b:'hot',bl:'🏢 أعمال',t:['1 User','1 سنة','Teams+'],r:4.8,rv:2400},
+{id:14,cat:'office',v:'Microsoft',ico:'📊',name:'Microsoft Project 2021 Standard',desc:'إدارة المشاريع الاحترافية — Gantt',p:169,op:2250,b:'new',bl:'📊 مميز',t:['1 PC','مدى الحياة'],r:4.7,rv:560},
+{id:15,cat:'office',v:'Microsoft',ico:'📐',name:'Microsoft Visio 2021 Standard',desc:'رسم المخططات الاحترافية',p:169,op:1875,b:'new',bl:'📐 مميز',t:['1 PC','مدى الحياة'],r:4.7,rv:480},
+{id:16,cat:'creative',v:'Adobe',ico:'📄',name:'Adobe Acrobat Pro DC (1 سنة)',desc:'إنشاء وتحرير وتوقيع PDF احترافياً',p:225,op:896,b:'hot',bl:'🔥 الأكثر طلباً',t:['1 Device','1 سنة'],r:4.8,rv:4200},
+{id:17,cat:'creative',v:'Adobe',ico:'🎨',name:'Adobe Photoshop CC (1 سنة)',desc:'أقوى برنامج تحرير صور في العالم',p:169,op:746,b:'pop',bl:'⭐ احترافي',t:['1 Device','1 سنة'],r:4.8,rv:3800},
+{id:18,cat:'creative',v:'Adobe',ico:'🎬',name:'Adobe Premiere Pro (1 سنة)',desc:'تحرير فيديو احترافي للمحتوى',p:169,op:746,b:'pop',bl:'⭐ محترف',t:['1 Device','1 سنة'],r:4.7,rv:2100},
+{id:19,cat:'creative',v:'Adobe',ico:'📷',name:'Adobe Lightroom Classic (1 سنة)',desc:'تعديل الصور الفوتوغرافية',p:131,op:446,b:'sale',bl:'💛 تخفيض',t:['1 Device','1 سنة'],r:4.7,rv:1800},
+{id:20,cat:'creative',v:'Adobe',ico:'🌟',name:'Adobe Creative Cloud All Apps',desc:'جميع تطبيقات Adobe — 20+ تطبيق',p:675,op:2250,b:'hot',bl:'🔥 الباقة الكاملة',t:['2 Devices','1 سنة'],r:4.7,rv:1200},
+{id:21,cat:'creative',v:'Autodesk',ico:'📐',name:'AutoCAD 2025 (1 سنة)',desc:'التصميم الهندسي ثنائي وثلاثي الأبعاد',p:281,op:7031,b:'sale',bl:'💛 توفير كبير',t:['1 PC','1 سنة'],r:4.8,rv:980},
+{id:22,cat:'creative',v:'Corel',ico:'🖌',name:'CorelDRAW Graphics Suite 2024',desc:'تصميم الجرافيك والرسوم الاحترافية',p:244,op:1125,b:'new',bl:'🆕 2024',t:['1 PC','1 سنة'],r:4.6,rv:720},
+{id:23,cat:'creative',v:'Wondershare',ico:'🎥',name:'Wondershare Filmora 13 (1 سنة)',desc:'تحرير فيديو بسيط واحترافي مع AI',p:131,op:338,b:'new',bl:'🆕 AI Video',t:['1 PC','1 سنة'],r:4.6,rv:1400},
+{id:24,cat:'security',v:'Kaspersky',ico:'🛡',name:'Kaspersky Plus (1 PC · 1 سنة)',desc:'حماية متقدمة + VPN + مدير كلمات المرور',p:75,op:188,b:'hot',bl:'🔥 الأفضل',t:['1 PC','1 سنة','VPN+'],r:4.9,rv:8700},
+{id:25,cat:'security',v:'Kaspersky',ico:'🔐',name:'Kaspersky Total Security (3 PC)',desc:'حماية شاملة للعائلة — 3 أجهزة',p:105,op:300,b:'pop',bl:'⭐ عائلي',t:['3 PC','1 سنة'],r:4.9,rv:5400},
+{id:26,cat:'security',v:'Bitdefender',ico:'🔒',name:'Bitdefender Antivirus Plus (1 PC)',desc:'حماية خفيفة لا تثقل الجهاز',p:60,op:150,b:'sale',bl:'💛 اقتصادي',t:['1 PC','1 سنة'],r:4.8,rv:6200},
+{id:27,cat:'security',v:'Bitdefender',ico:'🛡',name:'Bitdefender Total Security (5 PC)',desc:'الحماية الكاملة لجميع أجهزتك',p:94,op:263,b:'pop',bl:'⭐ الأكثر مبيعاً',t:['5 PC','1 سنة'],r:4.8,rv:9100},
+{id:28,cat:'security',v:'Norton',ico:'🟡',name:'Norton 360 Deluxe (5 Devices)',desc:'حماية + VPN + 50GB Backup',p:94,op:375,b:'sale',bl:'💛 شامل',t:['5 Devices','1 سنة'],r:4.7,rv:4800},
+{id:29,cat:'security',v:'ESET',ico:'🟢',name:'ESET Internet Security (1 PC)',desc:'حماية خفيفة الوزن فائقة الكفاءة',p:86,op:225,b:'pop',bl:'⭐ خفيف',t:['1 PC','1 سنة'],r:4.8,rv:3200},
+{id:30,cat:'security',v:'Malwarebytes',ico:'🔵',name:'Malwarebytes Premium (1 PC)',desc:'التخلص من البرامج الضارة نهائياً',p:75,op:169,b:'new',bl:'🆕 Anti-Malware',t:['1 PC','1 سنة'],r:4.7,rv:2900},
+{id:31,cat:'security',v:'NordVPN',ico:'🌐',name:'NordVPN (1 سنة · 6 أجهزة)',desc:'أسرع VPN في العالم — 5400+ خادم',p:188,op:375,b:'hot',bl:'🔥 VPN #1',t:['6 Devices','1 سنة'],r:4.8,rv:7600},
+{id:32,cat:'security',v:'ExpressVPN',ico:'⚡',name:'ExpressVPN (1 سنة · 5 أجهزة)',desc:'VPN فائق السرعة للخصوصية والبث',p:225,op:450,b:'pop',bl:'⭐ سريع',t:['5 Devices','1 سنة'],r:4.7,rv:4300},
+{id:33,cat:'security',v:'McAfee',ico:'🔴',name:'McAfee Total Protection (5 Dev)',desc:'حماية شاملة + تحسين الأداء',p:86,op:338,b:'sale',bl:'💛 توفير',t:['5 Devices','1 سنة'],r:4.6,rv:3100},
+{id:34,cat:'dev',v:'JetBrains',ico:'⚙️',name:'JetBrains All Products Pack (1 سنة)',desc:'IntelliJ + PyCharm + WebStorm وأكثر',p:281,op:938,b:'hot',bl:'🔥 للمطورين',t:['1 User','1 سنة','All IDEs'],r:4.9,rv:1800},
+{id:35,cat:'dev',v:'JetBrains',ico:'☕',name:'IntelliJ IDEA Ultimate (1 سنة)',desc:'أفضل IDE لـ Java وKotlin',p:169,op:938,b:'pop',bl:'⭐ Java Dev',t:['1 User','1 سنة'],r:4.9,rv:1200},
+{id:36,cat:'dev',v:'JetBrains',ico:'🐍',name:'PyCharm Professional (1 سنة)',desc:'IDE احترافي لبايثون وعلم البيانات',p:131,op:746,b:'pop',bl:'⭐ Python',t:['1 User','1 سنة'],r:4.9,rv:980},
+{id:37,cat:'dev',v:'VMware',ico:'🖥',name:'VMware Workstation Pro 17',desc:'تشغيل أنظمة متعددة على جهاز واحد',p:225,op:746,b:'new',bl:'🆕 Virtual',t:['1 PC','مدى الحياة'],r:4.8,rv:750},
+{id:38,cat:'dev',v:'Parallels',ico:'🍎',name:'Parallels Desktop 19 for Mac (1 سنة)',desc:'تشغيل Windows على Mac بكفاءة',p:263,op:563,b:'new',bl:'🍎 Mac Only',t:['1 Mac','1 سنة','M1/M2/M3'],r:4.8,rv:620},
+{id:39,cat:'dev',v:'Microsoft',ico:'🗃',name:'SQL Server 2022 Standard',desc:'قاعدة بيانات مايكروسوفت الأحدث',p:188,op:3375,b:'new',bl:'🆕 Database',t:['Server','مدى الحياة'],r:4.8,rv:340},
+{id:40,cat:'edu',v:'Rosetta Stone',ico:'🌐',name:'Rosetta Stone (5 لغات · مدى الحياة)',desc:'تعلم 5 لغات بطريقة تفاعلية فعّالة',p:131,op:671,b:'sale',bl:'💛 تعليم',t:['5 Languages','مدى الحياة'],r:4.5,rv:2100},
+{id:41,cat:'edu',v:'Microsoft',ico:'🎓',name:'Microsoft Office 365 Education',desc:'أوفيس للطلاب والمؤسسات التعليمية',p:113,op:263,b:'sale',bl:'💛 طلابي',t:['1 Student','1 سنة'],r:4.7,rv:1800},
+{id:42,cat:'edu',v:'Adobe',ico:'🖼',name:'Adobe Creative Cloud Education',desc:'جميع تطبيقات Adobe بسعر مخفض للطلاب',p:338,op:1125,b:'pop',bl:'⭐ طلابي',t:['1 Device','1 سنة'],r:4.6,rv:950},
+{id:43,cat:'edu',v:'Autodesk',ico:'🏗',name:'AutoCAD 2025 Education (1 سنة)',desc:'AutoCAD للطلاب والمؤسسات التعليمية',p:150,op:7031,b:'sale',bl:'💛 طلابي',t:['1 PC','1 سنة'],r:4.8,rv:640},
+];
+var IT_PKGS=[
+{tier:'Starter',dMin:3,dMax:5,mp:184,ap:147,sla:'يوم العمل التالي',rec:false,feats:['Helpdesk عن بُعد (بريد وشات)','نشر ومراقبة الفيروسات','إدارة تحديثات OS','تقرير IT شهري','إعداد ودعم البريد',{t:'مراقبة الشبكة',no:true},{t:'تدقيق أمني',no:true}]},
+{tier:'Small Biz',dMin:6,dMax:10,mp:334,ap:267,sla:'4 ساعات عمل',rec:false,feats:['Helpdesk (بريد، شات، هاتف)','نشر ومراقبة الفيروسات','إدارة تحديثات OS','مراقبة شبكة أساسية','إدارة خادم البريد','تدقيق أمني كل شهرين',{t:'مراقبة متقدمة',no:true}]},
+{tier:'Business',dMin:11,dMax:20,mp:559,ap:447,sla:'ساعتا عمل',rec:true,feats:['كل مميزات Small Biz','مراقبة شبكة متقدمة 24/7','إدارة برنامج مكافحة فيروسات كامل','تدقيق أمني شهري','إدارة النسخ الاحتياطية السحابية','إعداد وإدارة VPN','مراجعة استراتيجية IT ربع سنوية']},
+{tier:'Professional',dMin:21,dMax:35,mp:859,ap:687,sla:'ساعة عمل واحدة',rec:false,feats:['كل مميزات Business','مهندس IT أول مخصص','مسح أمني أسبوعي','اكتشاف التهديدات والاستجابة','إدارة M365/Google Workspace','تخطيط التعافي من الكوارث']},
+{tier:'Enterprise',dMin:36,dMax:50,mp:1309,ap:1047,sla:'30 دقيقة',rec:false,feats:['كل مميزات Professional','مدير حساب مسمى','ضمان SLA 30 دقيقة','تذاكر دعم غير محدودة','سياسات أمان مخصصة','إدارة كاملة للبنية السحابية']},
+];
+var COURSES=[
+{cat:'ms',ico:'🪟',color:'#0078D4',lvl:'متوسط',name:'Azure Administrator (AZ-104)',meta:['40 س','فيديو + مختبرات','عربي/EN'],p:'4,500 ر.س',old:'7,500 ر.س'},
+{cat:'ms',ico:'📋',color:'#D83B01',lvl:'مبتدئ',name:'Microsoft 365 Fundamentals (MS-900)',meta:['20 س','ذاتي التعلم','عربي'],p:'1,875 ر.س',old:'3,375 ر.س'},
+{cat:'sec',ico:'🛡',color:'#E60026',lvl:'متقدم',name:'CompTIA Security+ (SY0-701)',meta:['50 س','مباشر + مسجل','إنجليزي'],p:'6,750 ر.س',old:'12,000 ر.س'},
+{cat:'cisco',ico:'🌐',color:'#1BA0D7',lvl:'متوسط',name:'Cisco CCNA (200-301)',meta:['60 س','مختبرات عملية','عربي'],p:'8,250 ر.س',old:'15,000 ر.س'},
+{cat:'cloud',ico:'☁️',color:'#FF9900',lvl:'متوسط',name:'AWS Solutions Architect',meta:['45 س','فيديو + تدريب','إنجليزي'],p:'5,625 ر.س',old:'10,500 ر.س'},
+{cat:'biz',ico:'📊',color:'#217346',lvl:'مبتدئ',name:'Excel المتقدم + Power BI',meta:['25 س','عربي','شهادة'],p:'2,250 ر.س',old:'4,125 ر.س'},
+{cat:'sec',ico:'🔐',color:'#7C3AED',lvl:'متقدم',name:'Certified Ethical Hacker (CEH)',meta:['55 س','مباشر أونلاين','إنجليزي'],p:'13,125 ر.س',old:'22,500 ر.س'},
+{cat:'cloud',ico:'🔵',color:'#0078D4',lvl:'مبتدئ',name:'Azure Fundamentals (AZ-900)',meta:['15 س','ذاتي التعلم','عربي'],p:'1,500 ر.س',old:'2,625 ر.س'},
+{cat:'biz',ico:'🤖',color:'#10B981',lvl:'مبتدئ',name:'ChatGPT والذكاء الاصطناعي للأعمال',meta:['12 س','عربي','تطبيقي'],p:'1,313 ر.س',old:'2,250 ر.س'},
+{cat:'ms',ico:'🏗',color:'#5C2D91',lvl:'متقدم',name:'Microsoft Power Platform (PL-900)',meta:['30 س','فيديو + مختبرات','عربي/EN'],p:'3,375 ر.س',old:'6,000 ر.س'},
+];
+var HW=[
+{cat:'laptop',ico:'💻',brand:'Dell',name:'Dell Latitude 5540 Business',specs:'Intel i7 13th · 16GB · 512GB SSD · 15.6"',p:'14,250 ر.س'},
+{cat:'laptop',ico:'💻',brand:'HP',name:'HP EliteBook 840 G10',specs:'Intel i5 13th · 16GB · 256GB SSD · 14"',p:'10,875 ر.س'},
+{cat:'laptop',ico:'💻',brand:'Lenovo',name:'ThinkPad L14 Gen 4',specs:'Ryzen 5 · 8GB · 256GB SSD · 14"',p:'8,250 ر.س'},
+{cat:'desktop',ico:'🖥',brand:'Dell',name:'Dell OptiPlex 7010 SFF',specs:'Intel i7 · 16GB · 512GB · Win11 Pro',p:'9,750 ر.س'},
+{cat:'desktop',ico:'🖥',brand:'HP',name:'HP EliteDesk 800 G9',specs:'Intel i5 · 8GB · 256GB SSD',p:'7,125 ر.س'},
+{cat:'network',ico:'📡',brand:'Cisco',name:'Cisco RV340 Dual WAN Router',specs:'VPN · Firewall · مستوى الأعمال',p:'5,250 ر.س'},
+{cat:'network',ico:'📡',brand:'Ubiquiti',name:'UniFi AP Professional WiFi 6',specs:'4x4 MIMO · PoE · 300 عميل',p:'3,375 ر.س'},
+{cat:'server',ico:'🗄',brand:'Dell',name:'Dell PowerEdge T150 Tower Server',specs:'Xeon E-2314 · 16GB ECC · 2TB · RAID',p:'28,125 ر.س'},
+];
+var REVS=[
+{n:'أحمد ك.',r:'مدير عمليات · الرياض',s:5,t:'خدمة ZATCA ممتازة. الفريق أنجز الربط خلال 3 أيام فقط.',c:'#0EA5E9'},
+{n:'سارة م.',r:'مصممة · دبي',s:5,t:'Adobe Creative Cloud يعمل بشكل مثالي. الدعم الفني ساعدني في التفعيل.',c:'#8B5CF6'},
+{n:'محمد أ.',r:'مدير IT · جدة',s:5,t:'برنامج الموزعين رائع. كسبت 9,000 ريال في أول شهر!',c:'#F59E0B'},
+{n:'خالد س.',r:'مدير تنفيذي · الدمام',s:5,t:'باقة Business IT تساوي كل ريال. فريق الدعم محترف دائماً.',c:'#10B981'},
+{n:'نورة ع.',r:'صاحبة مشروع · الرياض',s:4,t:'ويندوز 11 Pro وصل فوراً. وفرت أكثر من 2,000 ريال مقارنة بالسعر الرسمي.',c:'#1ABCEE'},
+];
+
+var cart=[],billing='monthly',sCat='all',sSort='feat',pMax=99999,promoOn=false,loggedIn=false;
+var dCatV='all',dSrtV='feat',dPrV=99999;
+
+function go(id){
+  var pgs=document.querySelectorAll('.pg');
+  for(var i=0;i<pgs.length;i++) pgs[i].classList.remove('on');
+  var nis=document.querySelectorAll('.ni');
+  for(var i=0;i<nis.length;i++) nis[i].classList.remove('on');
+  var pg=document.getElementById('pg-'+id);
+  if(pg) pg.classList.add('on');
+  var bn=document.getElementById('bn-'+id);
+  if(bn) bn.classList.add('on');
+  window.scrollTo(0,0);
+  if(id==='store') rStore();
+  if(id==='cart') rCart();
+  if(id==='deals') rDeals();
+}
+
+function goStore(cat,el){
+  sCat=cat;go('store');
+  var pills=document.querySelectorAll('#stPills .tp');
+  for(var i=0;i<pills.length;i++) pills[i].classList.remove('on');
+  var pill=document.querySelector('#stPills [data-cat="'+cat+'"]');
+  if(pill) pill.classList.add('on');
+}
+
+function pCard(p){
+  var bm={hot:'bh',new:'bn2',sale:'bs',pop:'bpp'};
+  var st='★'.repeat(Math.floor(p.r))+(p.r%1>=.5?'½':'');
+  return '<div class="pc"><div class="pct"><div class="pci">'+p.ico+'</div><span class="bdg '+bm[p.b]+'">'+p.bl+'</span></div><div class="pcb"><div class="pcv">'+p.v+'</div><div class="pcn">'+p.name+'</div><div class="pcd">'+p.desc+'</div><div class="pctg">'+p.t.map(function(t){return'<span class="pt2">'+t+'</span>'}).join('')+'</div><div class="pcr"><span class="st2">'+st+'</span><span class="rv">'+p.r+'</span><span class="rc">('+p.rv.toLocaleString()+')</span></div></div><div class="pcf"><div><div class="ppo">'+(p.op)+' ر.س</div><div class="pp">'+p.p+' ر.س</div></div><button class="ba" onclick="addCart(\''+p.name.replace(/\'/g,"\\'")+'\',' +"'"+p.p+" ر.س'"+')">أضف</button></div></div>';
+}
+
+function rHome(){
+  var fl=document.getElementById('hFlash');
+  if(fl) fl.innerHTML=PRODS.filter(function(p,i){return i<4}).map(pCard).join('');
+  var bs=document.getElementById('hBest');
+  if(bs) bs.innerHTML=PRODS.filter(function(p,i){return i>=4&&i<8}).map(pCard).join('');
+  var rv=document.getElementById('hRevs');
+  if(rv) rv.innerHTML=REVS.map(function(r){
+    return '<div class="rvc"><div class="rvh"><div class="rva" style="background:'+r.c+'">'+r.n.charAt(0)+'</div><div><div class="rvn">'+r.n+'</div><div class="rvr">'+r.r+'</div></div><div class="rvs">'+'★'.repeat(r.s)+'</div></div><div class="rvt">"'+r.t+'"</div></div>';
+  }).join('');
+}
+
+function rStore(){
+  var q=document.getElementById('stSrch')?document.getElementById('stSrch').value:'';
+  var sv=document.getElementById('stSort')?document.getElementById('stSort').value:sSort;
+  var list=PRODS.filter(function(p){
+    var catOk=sCat==='all'||p.cat===sCat;
+    var prOk=p.p<=pMax;
+    var qOk=!q||p.name.toLowerCase().indexOf(q.toLowerCase())>=0||p.v.toLowerCase().indexOf(q.toLowerCase())>=0||p.desc.toLowerCase().indexOf(q.toLowerCase())>=0;
+    return catOk&&prOk&&qOk;
+  });
+  if(sv==='low') list.sort(function(a,b){return a.p-b.p});
+  else if(sv==='high') list.sort(function(a,b){return b.p-a.p});
+  else if(sv==='rating') list.sort(function(a,b){return b.r-a.r});
+  var g=document.getElementById('stGrid');
+  if(g){g.innerHTML=list.map(pCard).join('');var cnt=document.getElementById('stCnt');if(cnt)cnt.textContent=list.length;}
+}
+function fStore(){rStore();}
+function sPill(el,cat){
+  sCat=cat;
+  var pills=document.querySelectorAll('#stPills .tp');
+  for(var i=0;i<pills.length;i++) pills[i].classList.remove('on');
+  el.classList.add('on');
+  rStore();
+}
+function doSearch(v){go('store');setTimeout(rStore,50);}
+function oDrw(){document.getElementById('fDov').classList.add('on');}
+function cDrw(){document.getElementById('fDov').classList.remove('on');}
+function dCat(el,c){dCatV=c;var ch=el.parentElement.querySelectorAll('.fc2');for(var i=0;i<ch.length;i++)ch[i].classList.remove('on');el.classList.add('on');}
+function dSrt(el,s){dSrtV=s;var so=document.querySelectorAll('.soo');for(var i=0;i<so.length;i++)so[i].classList.remove('on');el.classList.add('on');}
+function dPr(el,p){dPrV=p;var ch=el.parentElement.querySelectorAll('.fc2');for(var i=0;i<ch.length;i++)ch[i].classList.remove('on');el.classList.add('on');}
+function aDrw(){sCat=dCatV;sSort=dSrtV;pMax=dPrV;cDrw();var pill=document.querySelector('#stPills [data-cat="'+sCat+'"]');var pills=document.querySelectorAll('#stPills .tp');for(var i=0;i<pills.length;i++)pills[i].classList.remove('on');if(pill)pill.classList.add('on');rStore();}
+
+function sSolTab(tab){
+  var slts=document.querySelectorAll('.slt');
+  for(var i=0;i<slts.length;i++) slts[i].classList.remove('on');
+  var slcs=document.querySelectorAll('.slc');
+  for(var i=0;i<slcs.length;i++) slcs[i].classList.remove('on');
+  var tabs=['zatca','cyber','training','reseller','hardware','consult','whatsapp'];
+  var idx=tabs.indexOf(tab);
+  if(slts[idx]) slts[idx].classList.add('on');
+  var sc=document.getElementById('sc-'+tab);
+  if(sc) sc.classList.add('on');
+  if(tab==='hardware') rHW('all');
+  if(tab==='training') rCrs('all');
+}
+
+function rHW(cat){
+  var list=cat==='all'?HW:HW.filter(function(h){return h.cat===cat});
+  var g=document.getElementById('hwGd');
+  if(!g) return;
+  g.innerHTML=list.map(function(h){
+    return '<div class="pc"><div class="pct"><div class="pci">'+h.ico+'</div></div><div class="pcb"><div class="pcv">'+h.brand+'</div><div class="pcn">'+h.name+'</div><div class="pcd">'+h.specs+'</div></div><div class="pcf"><div class="pp">'+h.p+'</div><button class="ba" onclick="addCart(\''+h.name.replace(/\'/g,"\\'")+'\',' +"'"+h.p+"'"+')">أضف</button></div></div>';
+  }).join('');
+}
+function fHW(cat,el){var tp=el.parentElement.querySelectorAll('.tp');for(var i=0;i<tp.length;i++)tp[i].classList.remove('on');el.classList.add('on');rHW(cat);}
+
+function rCrs(cat){
+  var list=cat==='all'?COURSES:COURSES.filter(function(c){return c.cat===cat});
+  var g=document.getElementById('crsGd');
+  if(!g) return;
+  var lc={مبتدئ:'var(--ok)',متوسط:'var(--warn)',متقدم:'var(--err)'};
+  g.innerHTML=list.map(function(c){
+    return '<div class="crc"><div class="crb" style="background:'+c.color+'20">'+c.ico+'</div><div class="crbd"><div class="crl" style="color:'+(lc[c.lvl]||'var(--g)')+'">'+c.lvl+'</div><div class="crn">'+c.name+'</div><div class="crm">'+c.meta.map(function(m){return'<span>📌 '+m+'</span>'}).join('')+'</div><div class="crf"><div><div class="cro">'+c.old+'</div><div class="crp">'+c.p+'</div></div><button class="ba" onclick="addCart(\'دورة: '+c.name.replace(/\'/g,"\\'")+'\',' +"'"+c.p+"'"+')">تسجيل</button></div></div></div>';
+  }).join('');
+}
+function fCrs(cat,el){var tp=el.parentElement.querySelectorAll('.tp');for(var i=0;i<tp.length;i++)tp[i].classList.remove('on');el.classList.add('on');rCrs(cat);}
+
+function rIT(){
+  var el=document.getElementById('itPkgs');
+  if(!el) return;
+  el.innerHTML=IT_PKGS.map(function(pkg){
+    var pr=billing==='annual'?pkg.ap:pkg.mp;
+    var save=billing==='annual'?'<div style="font-size:11px;color:var(--ok);font-weight:600;margin-top:2px">وفّر '+(((pkg.mp-pkg.ap)*12).toLocaleString())+' ر.س/سنة</div>':'';
+    var feats=pkg.feats.map(function(f){return typeof f==='string'?'<div class="ipf">'+f+'</div>':'<div class="ipf no">'+f.t+'</div>'}).join('');
+    return '<div class="ipc'+(pkg.rec?' rec':'')+'">'+
+      (pkg.rec?'<div class="iprc">⭐ الأكثر طلباً</div>':'')+
+      '<div class="ipt">'+pkg.tier+'</div>'+
+      '<div class="ipn">'+pkg.tier+'</div>'+
+      '<div class="ipd">🖥 '+pkg.dMin+'–'+pkg.dMax+' جهاز</div>'+
+      '<div class="ipp">'+pr.toLocaleString()+' <span style="font-size:14px;font-weight:600">ر.س</span></div>'+
+      '<div class="ippr">/ شهرياً · '+billing+'</div>'+
+      save+
+      '<div class="ippd">~'+Math.ceil(pr/pkg.dMax)+' ر.س/جهاز</div>'+
+      '<div class="ipdv"></div>'+
+      '<div class="ipfl">'+feats+'</div>'+
+      '<div class="ipsl">⏱ SLA: <strong style="color:var(--dk);margin-right:3px">'+pkg.sla+'</strong></div>'+
+      '<button class="btn '+(pkg.rec?'bc':'bo')+' bf" onclick="addCart(\'IT '+pkg.tier+' ('+pkg.dMin+'-'+pkg.dMax+' أجهزة)\',\''+pr.toLocaleString()+' ر.س/شهر\')">اختر '+pkg.tier+' →</button>'+
+      '</div>';
+  }).join('');
+}
+function setBill(t){
+  billing=t;
+  var bm=document.getElementById('billM');
+  var ba=document.getElementById('billA');
+  if(bm){if(t==='monthly')bm.classList.add('on');else bm.classList.remove('on');}
+  if(ba){if(t==='annual')ba.classList.add('on');else ba.classList.remove('on');}
+  rIT();
+}
+
+function rDeals(){
+  var g=document.getElementById('dlGd');
+  if(g) g.innerHTML=PRODS.filter(function(p){return p.b==='hot'||p.b==='sale'}).map(pCard).join('');
+  var pairs=[['th','dh'],['tm','dm'],['ts','ds']];
+  pairs.forEach(function(pair){
+    var src=document.getElementById(pair[0]);
+    var dst=document.getElementById(pair[1]);
+    if(src&&dst) dst.textContent=src.textContent;
+  });
+}
+
+function addCart(name,price){
+  var found=false;
+  for(var i=0;i<cart.length;i++){if(cart[i].name===name){cart[i].qty++;found=true;break;}}
+  if(!found) cart.push({name:name,price:price,qty:1});
+  updCart();
+  var short=name.length>28?name.substring(0,28)+'...':name;
+  toast('✅','أُضيف للسلة!',short);
+}
+function updCart(){
+  var total=0;
+  for(var i=0;i<cart.length;i++) total+=cart[i].qty;
+  var badge=document.getElementById('cbdg');
+  var dot=document.getElementById('cDot');
+  if(badge){badge.textContent=total;if(total>0)badge.classList.add('on');else badge.classList.remove('on');}
+  if(dot){if(total>0)dot.classList.add('on');else dot.classList.remove('on');}
+}
+function rCart(){
+  var iEl=document.getElementById('cartItms');
+  var cw=document.getElementById('cartWrap');
+  if(!iEl) return;
+  if(!cart.length){
+    iEl.innerHTML='<div class="es"><div class="esi">🛒</div><div class="est">السلة فارغة</div><div class="esd">تصفح المتجر وأضف منتجات</div><button class="btn bc" onclick="go(\'store\')">تصفح المتجر ←</button></div>';
+    if(cw) cw.style.display='none';
+    return;
+  }
+  if(cw) cw.style.display='block';
+  var sub=0;
+  var html='';
+  for(var i=0;i<cart.length;i++){
+    var item=cart[i];
+    var numPrice=parseFloat(item.price.replace(/[^0-9.]/g,''))*item.qty;
+    sub+=numPrice;
+    html+='<div class="cit"><div class="cii">🔑</div><div class="cin"><h4>'+item.name+(item.qty>1?' ×'+item.qty:'')+'</h4><p>تسليم فوري</p></div><div class="cip">'+numPrice.toLocaleString()+' ر.س</div><div class="cid" onclick="delItem('+i+')">🗑</div></div>';
+  }
+  iEl.innerHTML=html;
+  rTots(sub);
+}
+function rTots(sub){
+  var disc=promoOn?sub*.1:0;
+  var vat=(sub-disc)*.15;
+  var total=sub-disc+vat;
+  var el=document.getElementById('cartTots');
+  if(!el) return;
+  el.innerHTML='<div class="ctr"><span>المجموع</span><span>'+sub.toLocaleString()+' ر.س</span></div>'+(disc>0?'<div class="ctr" style="color:var(--ok)"><span>خصم (SOE25)</span><span>-'+disc.toLocaleString()+' ر.س</span></div>':'')+'<div class="ctr"><span>ضريبة القيمة المضافة 15%</span><span>'+vat.toFixed(0)+' ر.س</span></div><div class="ctr"><span>الشحن</span><span style="color:var(--ok)">مجاني ⚡</span></div><div class="ctr tot"><span>الإجمالي</span><span>'+total.toFixed(0)+' ر.س</span></div>';
+}
+function delItem(i){cart.splice(i,1);updCart();rCart();}
+function applyPromo(){
+  var inp=document.getElementById('promoInp');
+  var code=inp?inp.value.trim().toUpperCase():'';
+  if(code==='SOE25'){promoOn=true;toast('🎉','تم تطبيق الكود!','خصم 10% أُضيف للطلب');rCart();}
+  else toast('❌','كود غير صحيح','تحقق من الكود وأعد المحاولة');
+}
+function placeOrder(){
+  if(!cart.length) return;
+  toast('🎉','تم تأكيد الطلب!','المفاتيح أُرسلت لبريدك الإلكتروني');
+  cart=[];promoOn=false;updCart();
+  setTimeout(function(){rCart();go('account');},1500);
+}
+function selPay(el){var pos=document.querySelectorAll('.po2');for(var i=0;i<pos.length;i++)pos[i].classList.remove('on');el.classList.add('on');}
+function fmtCard(inp){var v=inp.value.replace(/\D/g,'').substring(0,16);inp.value=v.replace(/(.{4})/g,'$1 ').trim();}
+
+function swTab(t){
+  var tl=document.getElementById('tabL');
+  var tr=document.getElementById('tabR');
+  var fl=document.getElementById('fL');
+  var fr=document.getElementById('fR');
+  if(tl){if(t==='l')tl.classList.add('on');else tl.classList.remove('on');}
+  if(tr){if(t==='r')tr.classList.add('on');else tr.classList.remove('on');}
+  if(fl){if(t==='l')fl.classList.add('on');else fl.classList.remove('on');}
+  if(fr){if(t==='r')fr.classList.add('on');else fr.classList.remove('on');}
+}
+function doLogin(){loggedIn=true;var av=document.getElementById('authVw');var dv=document.getElementById('dashVw');if(av)av.style.display='none';if(dv)dv.style.display='block';toast('👋','أهلاً بعودتك!','تم تسجيل الدخول');}
+function doReg(){loggedIn=true;var av=document.getElementById('authVw');var dv=document.getElementById('dashVw');if(av)av.style.display='none';if(dv)dv.style.display='block';toast('🎉','تم إنشاء الحساب!','أهلاً في SOE');}
+function doOut(){loggedIn=false;var av=document.getElementById('authVw');var dv=document.getElementById('dashVw');if(av)av.style.display='block';if(dv)dv.style.display='none';toast('👋','تم تسجيل الخروج','إلى اللقاء!');}
+
+function calcROI(){
+  var el=document.getElementById('invC');
+  var n=el?parseInt(el.value)||0:0;
+  var res=document.getElementById('roiR');
+  if(!res) return;
+  if(n<=0){res.style.display='none';return;}
+  var risk=n*187500;
+  var rn=document.getElementById('roiN');
+  var rt=document.getElementById('roiT');
+  if(rn) rn.textContent='حتى '+risk.toLocaleString()+' ر.س';
+  if(rt) rt.textContent='مخاطرة غرامات ZATCA على '+n+' فاتورة شهرياً';
+  res.style.display='block';
+}
+function calcRS(){
+  var el=document.getElementById('rsC');
+  var n=el?parseInt(el.value)||0:0;
+  var res=document.getElementById('rsR');
+  if(!res) return;
+  if(n<=0){res.style.display='none';return;}
+  var income=Math.round(n*169*0.17);
+  var rn=document.getElementById('rsN');
+  var rt=document.getElementById('rsT');
+  if(rn) rn.textContent=income.toLocaleString()+' ر.س/شهر';
+  if(rt) rt.textContent='تقدير: '+n+' عميل × متوسط 169 ر.س × عمولة 17%';
+  res.style.display='block';
+}
+
+function toast(ico,t1,t2){
+  var el=document.getElementById('tst');
+  var ti=document.getElementById('tsti');
+  var t1el=document.getElementById('tst1');
+  var t2el=document.getElementById('tst2');
+  if(!el) return;
+  if(ti) ti.textContent=ico;
+  if(t1el) t1el.textContent=t1;
+  if(t2el) t2el.textContent=t2;
+  el.classList.add('on');
+  clearTimeout(window._tt);
+  window._tt=setTimeout(function(){el.classList.remove('on');},3200);
+}
+
+var secs=8*3600+34*60+22;
+setInterval(function(){
+  secs=secs>0?secs-1:86399;
+  var h=String(Math.floor(secs/3600)).padStart(2,'0');
+  var m=String(Math.floor((secs%3600)/60)).padStart(2,'0');
+  var s=String(secs%60).padStart(2,'0');
+  var pairs2=[['th','dh'],['tm','dm'],['ts','ds']];
+  pairs2.forEach(function(pair){
+    var a=document.getElementById(pair[0]);
+    var b2=document.getElementById(pair[1]);
+    if(a) a.textContent=h;
+    if(b2) b2.textContent=(pair[0]==='th'||pair[0]==='dh')?h:(pair[0]==='tm'||pair[0]==='dm')?m:s;
+  });
+  var th=document.getElementById('th'); if(th) th.textContent=h;
+  var tm=document.getElementById('tm'); if(tm) tm.textContent=m;
+  var ts=document.getElementById('ts'); if(ts) ts.textContent=s;
+  var dh=document.getElementById('dh'); if(dh) dh.textContent=h;
+  var dm=document.getElementById('dm'); if(dm) dm.textContent=m;
+  var ds=document.getElementById('ds'); if(ds) ds.textContent=s;
+},1000);
+
+function closeNL(){var nl=document.getElementById('nl');if(nl){nl.classList.remove('on');nl.style.display='none';}}
+function subNL(){
+  var el=document.getElementById('nlInp');
+  var email=el?el.value:'';
+  if(!email||email.indexOf('@')<0){toast('⚠️','بريد غير صحيح','أدخل بريداً إلكترونياً صحيحاً');return;}
+  closeNL();
+  toast('🎁','تم الاشتراك!','كود الخصم 15%: WELCOME15');
+}
+
+var isEn=false;
+function toggleLang(){
+  isEn=!isEn;
+  var btn=document.getElementById('langBtn');
+  var html=document.documentElement;
+  if(isEn){
+    html.setAttribute('dir','ltr');html.setAttribute('lang','en');
+    if(btn) btn.textContent='عربي';
+    document.title='SOE — Software & Business Solutions';
+  } else {
+    html.setAttribute('dir','rtl');html.setAttribute('lang','ar');
+    if(btn) btn.textContent='EN';
+    document.title='SOE — Springs Of Expertise | متجر البرمجيات';
+  }
+}
+
+rHome();
+rStore();
+rIT();
+updCart();
+setTimeout(function(){
+  var nl=document.getElementById('nl');
+  if(nl){nl.style.display='block';setTimeout(function(){nl.classList.add('on');},100);}
+},7000);
+</script>
+
+<script>
+// ══════════════════════════════════════════════
+// SOE API CLIENT — ربط الموقع بالـ Backend
+// ══════════════════════════════════════════════
+var SOE_API_BASE = window.location.origin;
+
+async function apiCall(method, path, body) {
+  try {
+    var opts = { method: method, headers: { 'Content-Type': 'application/json' } };
+    var token = localStorage.getItem('soe_token');
+    if (token) opts.headers['Authorization'] = 'Bearer ' + token;
+    if (body) opts.body = JSON.stringify(body);
+    var res = await fetch(SOE_API_BASE + path, opts);
+    return await res.json();
+  } catch(e) { return { success: false, message: 'خطأ في الاتصال بالخادم' }; }
+}
+
+// تحميل المنتجات من الـ API تلقائياً
+async function loadProductsAPI() {
+  var data = await apiCall('GET', '/api/products?limit=100');
+  if (data.success && data.data.length) {
+    window.PRODS = data.data.map(function(p) {
+      return {
+        id: p.id, cat: p.category_slug, v: p.vendor,
+        ico: p.icon || '📦', name: p.name_ar,
+        desc: p.description_ar || '',
+        p: parseFloat(p.price_sar),
+        op: parseFloat(p.original_price_sar || p.price_sar * 2),
+        b: p.badge || 'new', bl: p.badge_label_ar || '',
+        t: JSON.parse(p.features || '[]'),
+        r: parseFloat(p.rating || 5), rv: parseInt(p.review_count || 0),
+        productId: p.id
+      };
+    });
+    if (typeof rStore === 'function') rStore();
+    if (typeof rHome === 'function') rHome();
+  }
+}
+
+// Checkout — إرسال الطلب للـ API
+async function checkoutWithAPI() {
+  if (!window.cart || !window.cart.length) {
+    if (typeof toast === 'function') toast('⚠️','السلة فارغة','أضف منتجاً أولاً');
+    return;
+  }
+
+  // جمع بيانات العميل من النموذج
+  var allInputs = document.querySelectorAll('input[type=text], input[type=email]');
+  var nameVal = '', emailVal = '';
+  allInputs.forEach(function(inp) {
+    var ph = (inp.placeholder || '').toLowerCase();
+    var val = inp.value.trim();
+    if (!nameVal && (ph.includes('أحمد') || ph.includes('الاسم') || ph.includes('first') || ph.includes('ahmed'))) nameVal = val;
+    if (!emailVal && (ph.includes('@') || ph.includes('email') || ph.includes('بريد'))) emailVal = val;
+  });
+
+  // fallback: أي email input
+  if (!emailVal) {
+    var eInp = document.querySelector('input[type=email]');
+    if (eInp) emailVal = eInp.value.trim();
+  }
+
+  var couponEl = document.getElementById('promoInp');
+  var coupon = couponEl ? couponEl.value.trim() : '';
+
+  if (!emailVal || !nameVal) {
+    if (typeof toast === 'function') toast('⚠️','أدخل بياناتك','الاسم والبريد الإلكتروني مطلوبان');
+    return;
+  }
+
+  var items = window.cart.map(function(item) {
+    return { productId: item.productId || item.id, quantity: item.qty || 1 };
+  });
+
+  if (typeof toast === 'function') toast('⏳','جاري إنشاء الطلب...','يرجى الانتظار');
+
+  var result = await apiCall('POST', '/api/payments/initiate', {
+    items: items,
+    customerName: nameVal,
+    customerEmail: emailVal,
+    country: 'SA',
+    couponCode: coupon || undefined
+  });
+
+  if (result.success) {
+    if (result.data.paymentUrl) {
+      window.location.href = result.data.paymentUrl;
+    } else {
+      // Moyasar غير مفعّل — عرض رقم الطلب
+      if (typeof toast === 'function') toast('✅','تم استلام طلبك!','رقم الطلب: ' + result.data.orderNumber);
+      window.cart = [];
+      if (typeof updCart === 'function') updCart();
+      if (typeof rCart === 'function') rCart();
+    }
+  } else {
+    if (typeof toast === 'function') toast('❌','فشل الطلب', result.message || 'يرجى المحاولة مجدداً');
+  }
+}
+
+// فحص نتيجة الدفع عند الرجوع من موياسر
+function checkPaymentResult() {
+  var params = new URLSearchParams(window.location.search);
+  var payment = params.get('payment');
+  var orderNum = params.get('order');
+  if (payment === 'success') {
+    window.cart = [];
+    if (typeof updCart === 'function') updCart();
+    setTimeout(function() {
+      if (typeof toast === 'function') toast('🎉','تم الدفع بنجاح!','المفتاح سيصلك على بريدك قريباً');
+    }, 500);
+    // تنظيف URL
+    window.history.replaceState({}, '', window.location.pathname);
+  } else if (payment === 'failed') {
+    setTimeout(function() {
+      if (typeof toast === 'function') toast('❌','فشل الدفع','يرجى المحاولة مجدداً');
+    }, 500);
+    window.history.replaceState({}, '', window.location.pathname);
+  }
+}
+
+// Login عبر API
+async function loginWithAPI(email, password) {
+  var d = await apiCall('POST', '/api/auth/login', { email: email, password: password });
+  if (d.success) {
+    localStorage.setItem('soe_token', d.data.token);
+    localStorage.setItem('soe_user', JSON.stringify(d.data.user));
+    if (typeof toast === 'function') toast('👋','أهلاً بعودتك!', d.data.user.name);
+    if (typeof doLogin === 'function') doLogin();
+    return true;
+  }
+  if (typeof toast === 'function') toast('❌','خطأ في الدخول', d.message);
+  return false;
+}
+
+// Register عبر API
+async function registerWithAPI(name, email, password) {
+  var d = await apiCall('POST', '/api/auth/register', { name: name, email: email, password: password });
+  if (d.success) {
+    localStorage.setItem('soe_token', d.data.token);
+    if (typeof toast === 'function') toast('🎉','تم إنشاء الحساب!','أهلاً في SOE');
+    if (typeof doReg === 'function') doReg();
+    return true;
+  }
+  if (typeof toast === 'function') toast('❌','خطأ', d.message);
+  return false;
+}
+
+// تبديل placeOrder الأصلي بـ checkoutWithAPI
+window._origPlaceOrder = window.placeOrder;
+window.placeOrder = checkoutWithAPI;
+
+// تهيئة
+document.addEventListener('DOMContentLoaded', function() {
+  checkPaymentResult();
+  loadProductsAPI();
+});
+// إذا DOM جاهز بالفعل
+if (document.readyState !== 'loading') {
+  checkPaymentResult();
+  loadProductsAPI();
+}
+</script>
+
+</body>
+</html>
